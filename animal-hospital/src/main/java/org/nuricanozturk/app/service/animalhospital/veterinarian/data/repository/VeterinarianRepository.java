@@ -14,6 +14,7 @@ public class VeterinarianRepository implements IVeterinarianRepository
 {
     private static final String COUNT_SQL = "select count(*) from veterinarians";
     private static final String FIND_BY_DIPLOMA_NO_SQL = "select * from veterinarians where diploma_no=:diplomaNo";
+    private static final String FIND_BY_LAST_NAME_SQL = "select * from veterinarians where last_name=:lastName";
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplatee; // Spring'in jdbc dependency
     // Birtakım sınıfları otomatik enjekte edebiliriz
     public VeterinarianRepository(NamedParameterJdbcTemplate m_namedParameterJdbcTemplatee)
@@ -65,7 +66,18 @@ public class VeterinarianRepository implements IVeterinarianRepository
         return veterinarians.isEmpty() ? Optional.empty() : Optional.of(veterinarians.get(0));
     }
 
+    @Override
+    public Iterable<Veterinarian> findByLastName(String lastName)
+    {
+        var paramMap = new HashMap<String, Object>();
+        var veterinarians = new ArrayList<Veterinarian>();
 
+        paramMap.put("lastName", lastName);
+
+        m_namedParameterJdbcTemplatee.query(FIND_BY_LAST_NAME_SQL, paramMap, (ResultSet rs) -> fillVeterinarian(rs, veterinarians));
+
+        return veterinarians;
+    }
 
 
     // Not Implemented
@@ -138,4 +150,6 @@ public class VeterinarianRepository implements IVeterinarianRepository
     {
         throw new UnsupportedOperationException("Not Implemented yet");
     }
+
+
 }

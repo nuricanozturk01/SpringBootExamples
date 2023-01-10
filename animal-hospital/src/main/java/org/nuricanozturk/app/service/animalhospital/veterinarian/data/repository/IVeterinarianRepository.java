@@ -5,5 +5,5 @@ import org.nuricanozturk.app.service.animalhospital.veterinarian.data.entity.Vet
 
 public interface IVeterinarianRepository extends ICrudRepository<Veterinarian, Long>
 {
-
+    Iterable<Veterinarian> findByLastName(String lastName);
 }

@@ -1,6 +1,7 @@
 package org.nuricanozturk.app.service.animalhospital.veterinarian.controller;
 
 import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.VeterinarianDTO;
+import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.VeterinariansDTO;
 import org.nuricanozturk.app.service.animalhospital.veterinarian.service.VeterinarianService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,4 +31,14 @@ public class VeterinarianController
     {
         return ResponseEntity.of(m_veterinarianService.findVeterinarianByDiplomaNo(diplomaNo));
     }
+
+    // changed from Iterable<VeterinarianDTO> for display like array
+    @GetMapping("lastName")
+    public VeterinariansDTO findByLastName(@RequestParam("n") String lastName)
+    {
+        return m_veterinarianService.findVeterinariansByLastName(lastName);
+    }
+
+
+
 }
