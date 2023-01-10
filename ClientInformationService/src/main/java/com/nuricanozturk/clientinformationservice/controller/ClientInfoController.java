@@ -1,6 +1,6 @@
 package com.nuricanozturk.clientinformationservice.controller;
 
-import com.nuricanozturk.clientinformationservice.view.ClientInfo;
+import com.nuricanozturk.clientinformationservice.data.entity.Client;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,7 @@ public class ClientInfoController
     @GetMapping("info")
     public String getClientInfo()
     {
-        var ci = new ClientInfo();
+        var ci = new Client();
 
         ci.host = m_httpServletRequest.getRemoteHost();
         ci.port = m_httpServletRequest.getRemotePort();
@@ -31,9 +31,9 @@ public class ClientInfoController
     }
 
     @GetMapping("json/info")
-    public ClientInfo getClientInfoJSON()
+    public Client getClientInfoJSON()
     {
-        var ci = new ClientInfo();
+        var ci = new Client();
 
         ci.host = m_httpServletRequest.getRemoteHost();
         ci.port = m_httpServletRequest.getRemotePort();

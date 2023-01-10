@@ -1,11 +1,8 @@
 package com.nuricanozturk.clientinformationservice.view;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.SortedMap;
-
-public class ClientInfo
+public class ClientDTO
 {
     public String host;
     public int port;
