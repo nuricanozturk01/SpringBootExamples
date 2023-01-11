@@ -44,6 +44,20 @@ public class VeterinarianServiceHelper
         return m_veterinarianRepository.findByMonthAndYear(month, year);
     }
 
+    public Iterable<Veterinarian> findVeterinariansByMonth(int month)
+    {
+        return m_veterinarianRepository.findByMonth(month);
+    }
+
+    public Iterable<Veterinarian> findVeterinariansByYear(int year)
+    {
+        return m_veterinarianRepository.findByYear(year);
+    }
+
+    public Iterable<Veterinarian> findVeterinariansByYearBetween(int before, int after)
+    {
+        return m_veterinarianRepository.findByYearBetween(before, after);
+    }
     public Veterinarian save(Veterinarian veterinarian)
     {
         return m_veterinarianRepository.save(veterinarian);

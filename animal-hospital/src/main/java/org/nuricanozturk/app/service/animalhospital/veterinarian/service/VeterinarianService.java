@@ -52,5 +52,25 @@ public class VeterinarianService
                 .toList());
     }
 
+    public VeterinariansDTO findVeterinariansByMonth(int month)
+    {
+        return m_veterinarianMapper.toVeterinariansDTO(
+                StreamSupport.stream(m_veterinarianServiceHelper.findVeterinariansByMonth(month).spliterator(), false)
+                        .map(m_veterinarianMapper::toVeterinarianDTO).toList());
+    }
+
+    public VeterinariansDTO findVeterinariansByYear(int year)
+    {
+        return m_veterinarianMapper.toVeterinariansDTO(
+                StreamSupport.stream(m_veterinarianServiceHelper.findVeterinariansByYear(year).spliterator(), false)
+                        .map(m_veterinarianMapper::toVeterinarianDTO).toList());
+    }
+
+    public VeterinariansDTO findVeterinariansByYearBetween(int before, int after)
+    {
+        return m_veterinarianMapper.toVeterinariansDTO(
+                StreamSupport.stream(m_veterinarianServiceHelper.findVeterinariansByYearBetween(before, after).spliterator(), false)
+                        .map(m_veterinarianMapper::toVeterinarianDTO).toList());
+    }
 
 }

@@ -9,4 +9,8 @@ public interface IVeterinarianRepository extends ICrudRepository<Veterinarian, L
 {
     Iterable<Veterinarian> findByLastName(String lastName);
     Iterable<Veterinarian> findByMonthAndYear(int month, int year);
+    Iterable<Veterinarian> findByMonth(int month);
+    Iterable<Veterinarian> findByYear(int year);
+    Iterable<Veterinarian> findByYearBetween(int beforeYear, int afterYear);
+
 }

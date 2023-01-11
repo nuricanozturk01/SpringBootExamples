@@ -44,6 +44,23 @@ public class VeterinarianController
     {
         return m_veterinarianService.findVeterinariansByMonthAndYear(month, year);
     }
+    @GetMapping("month")
+    public VeterinariansDTO findByMonth(@RequestParam("m") int month)
+    {
+        return m_veterinarianService.findVeterinariansByMonth(month);
+    }
+
+    @GetMapping("year")
+    public VeterinariansDTO findByYear(@RequestParam("y") int year)
+    {
+        return m_veterinarianService.findVeterinariansByYear(year);
+    }
+
+    @GetMapping("between")
+    public VeterinariansDTO findByYearBetween(@RequestParam("y1") int year1, @RequestParam("y2") int year2)
+    {
+        return m_veterinarianService.findVeterinariansByYearBetween(year1, year2);
+    }
 
 
 

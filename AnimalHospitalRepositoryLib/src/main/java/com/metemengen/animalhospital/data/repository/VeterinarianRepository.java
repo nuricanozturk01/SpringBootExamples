@@ -48,6 +48,12 @@ public class VeterinarianRepository implements IVeterinarianRepository
             """;
     // ParameterSource iface
 
+    private final String FIND_BY_MONTH = "select * from veterinarians where date_part('month',register_date) = :month";
+    private final String FIND_BY_YEAR = "select * from veterinarians where date_part('year',register_date) = :year";
+    private final String FIND_BY_YEAR_BETWEEN = """
+            
+            select * from veterinarians where date_part('year', register_date) between :before and :after
+            """;
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplatee; // Spring'in jdbc dependency
     // Birtakım sınıfları otomatik enjekte edebiliriz
 
@@ -134,6 +140,48 @@ public class VeterinarianRepository implements IVeterinarianRepository
         return veterinarians;
     }
 
+    @Override
+    public Iterable<Veterinarian> findByMonth(int month)
+    {
+        var paramMap = new HashMap<String, Object>();
+        var veterinarians = new ArrayList<Veterinarian>();
+
+        paramMap.put("month", month);
+
+        m_namedParameterJdbcTemplatee.query(FIND_BY_MONTH, paramMap,
+                (ResultSet rs) -> fillVeterinarian(rs, veterinarians));
+
+        return veterinarians;
+    }
+
+    @Override
+    public Iterable<Veterinarian> findByYear(int year)
+    {
+        var paramMap = new HashMap<String, Object>();
+        var veterinarians = new ArrayList<Veterinarian>();
+
+        paramMap.put("year", year);
+
+        m_namedParameterJdbcTemplatee.query(FIND_BY_YEAR, paramMap,
+                (ResultSet rs) -> fillVeterinarian(rs, veterinarians));
+
+        return veterinarians;
+    }
+
+    @Override
+    public Iterable<Veterinarian> findByYearBetween(int beforeYear, int afterYear)
+    {
+        var paramMap = new HashMap<String, Object>();
+        var veterinarians = new ArrayList<Veterinarian>();
+
+        paramMap.put("before", beforeYear);
+        paramMap.put("after", afterYear);
+
+        m_namedParameterJdbcTemplatee.query(FIND_BY_YEAR_BETWEEN, paramMap,
+                (ResultSet rs) -> fillVeterinarian(rs, veterinarians));
+
+        return veterinarians;
+    }
 
     @Override
     public <S extends Veterinarian> S save(S vet)
