@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDate;
 
-public class VeterinarianDTO
+public class VeterinarianSaveDTO
 {
     public long diplomaNo;
     public String firstName;
+    public String citizenId;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String middleName;
     public String lastName;
@@ -17,8 +18,3 @@ public class VeterinarianDTO
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     public LocalDate registerDate;
 }
-
-/*
-    Birden fazla repository varsa servisin bunu enjekte etmesi sıkıntı yaratabilir. Bunun için araya yumuşatıcı
-    katman koyarız. Bu Facade katmanıdır.
- */

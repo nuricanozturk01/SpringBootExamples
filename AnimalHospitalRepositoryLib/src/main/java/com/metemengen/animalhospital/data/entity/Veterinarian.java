@@ -1,4 +1,4 @@
-package org.nuricanozturk.app.service.animalhospital.veterinarian.data.entity;
+package com.metemengen.animalhospital.data.entity;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -13,7 +13,10 @@ public class Veterinarian
     public LocalDate birthDate;
     public LocalDate registerDate;
 
-    public Veterinarian(long diplomaNo, String citizenId, String firstName, Optional<String> middleName, String lastName, LocalDate birthDate, LocalDate registerDate) {
+    public Veterinarian(long diplomaNo, String citizenId, String firstName,
+                        Optional<String> middleName, String lastName,
+                        LocalDate birthDate, LocalDate registerDate)
+    {
         this.diplomaNo = diplomaNo;
         this.citizenId = citizenId;
         this.firstName = firstName;

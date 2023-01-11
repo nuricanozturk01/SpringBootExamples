@@ -1,13 +1,10 @@
 package org.nuricanozturk.app.service.animalhospital.veterinarian.mapper;
 
-import com.metemengen.animalhospital.data.entity.Veterinarian;
+import org.nuricanozturk.app.service.animalhospital.veterinarian.data.entity.Veterinarian;
 import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.VeterinarianDTO;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-
 @Component
-@Primary
 public class VeterinarianMapper implements IVeterinarianMapper
 {
     @Override

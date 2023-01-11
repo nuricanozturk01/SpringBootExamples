@@ -1,25 +1,63 @@
-package org.nuricanozturk.app.service.animalhospital.veterinarian.data.repository;
+package com.metemengen.animalhospital.data.repository;
 
-import org.nuricanozturk.app.service.animalhospital.veterinarian.data.entity.Veterinarian;
+
+
+import com.metemengen.animalhospital.data.BeanName;
+import com.metemengen.animalhospital.data.entity.Veterinarian;
+import com.metemengen.animalhospital.data.mapper.IVeterinarianMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
-@Repository // aynı zamanda bir component
+import static com.metemengen.animalhospital.data.BeanName.VETERINARIAN_REPOSITORY;
+
+@SuppressWarnings("all")
+@Repository(VETERINARIAN_REPOSITORY) // aynı zamanda bir component
 public class VeterinarianRepository implements IVeterinarianRepository
 {
+    /*
+        Sorgu sonucunda tıpkı ResultSet(iterator gibi çalışır fakat değil) isimli aynı iterator gibi çalışan sınıf elde ediyoruz
+        Queryler callbak alıyor ve data oldukça çağırıyor fakat boş gelirse herhangi bir veri gelmez fakat next yapmış olur
+        bu yüzden ilk datayı atlamış olur.
+        do-while ile bu yüzden çalışıyoruz.(en az bir kez çalışması garanti altında)
+
+     */
     private static final String COUNT_SQL = "select count(*) from veterinarians";
     private static final String FIND_BY_DIPLOMA_NO_SQL = "select * from veterinarians where diploma_no=:diplomaNo";
-    private static final String FIND_BY_LAST_NAME_SQL = "select * from veterinarians where last_name=:lastName";
+    private static final String FIND_BY_LAST_NAME_SQL =
+            "select * from veterinarians where last_name=:lastName";
+    private static final String FIND_BY_MONTH_AND_YEAR_SQL =
+            """
+               select * from veterinarians where date_part('month',register_date) = :month\s 
+               and\s 
+               date_part('year', register_date)= :year
+            """;
+    private final String SAVE_SQL = """
+            insert into veterinarians(diploma_no, citizen_id, first_name, middle_name, last_name, birth_date, register_date)
+            values(:diplomaNo, :citizenId, :firstName, :middleName, :lastName, :birthDate,:registerDate)
+            """;
+    // ParameterSource iface
+
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplatee; // Spring'in jdbc dependency
     // Birtakım sınıfları otomatik enjekte edebiliriz
-    public VeterinarianRepository(NamedParameterJdbcTemplate m_namedParameterJdbcTemplatee)
+
+    private final IVeterinarianMapper m_veterinarianMapper;
+
+    public VeterinarianRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplatee,
+                                  @Qualifier(BeanName.VETERINARIAN_MAPPER) IVeterinarianMapper veterinarianMapper)
     {
-        this.m_namedParameterJdbcTemplatee = m_namedParameterJdbcTemplatee;
+        m_namedParameterJdbcTemplatee = namedParameterJdbcTemplatee;
+        m_veterinarianMapper = veterinarianMapper;
     }
 
     // RowMapper, ResultSetExtractor, RowCallBack functional interface
@@ -38,12 +76,14 @@ public class VeterinarianRepository implements IVeterinarianRepository
 
     private static Veterinarian getVeterinarian(ResultSet rs) throws SQLException
     {
+        // NUllable ve null ise default değere geri döner getXXX metodları
+
         var dip = rs.getLong(1);
         var citId = rs.getString(2);
         var firstName = rs.getString(3);
         var middleNameOpt = Optional.ofNullable(rs.getString(4));
         var lastName = rs.getString(5);
-        var birthDate = rs.getDate(6).toLocalDate();
+        var birthDate = rs.getDate(6).toLocalDate(); // Date'i LocalDate'i çevirir
         var regDate = rs.getDate(7).toLocalDate();
         return new Veterinarian(dip, citId, firstName, middleNameOpt, lastName, birthDate, regDate);
     }
@@ -79,6 +119,35 @@ public class VeterinarianRepository implements IVeterinarianRepository
         return veterinarians;
     }
 
+    @Override
+    public Iterable<Veterinarian> findByMonthAndYear(int month, int year)
+    {
+        var paramMap = new HashMap<String, Object>();
+        var veterinarians = new ArrayList<Veterinarian>();
+
+        paramMap.put("month", month);
+        paramMap.put("year", year);
+
+        m_namedParameterJdbcTemplatee.query(FIND_BY_MONTH_AND_YEAR_SQL, paramMap,
+                (ResultSet rs) -> fillVeterinarian(rs, veterinarians));
+
+        return veterinarians;
+    }
+
+
+    @Override
+    public <S extends Veterinarian> S save(S vet)
+    {
+        var paramSource = new BeanPropertySqlParameterSource(m_veterinarianMapper.toVeterinarianSave(vet));
+
+        //isimler veterinarianEntityDTO ile aynı olacak
+        paramSource.registerSqlType("birthDate", Types.DATE);
+        paramSource.registerSqlType("registerDate", Types.DATE);
+
+        m_namedParameterJdbcTemplatee.update(SAVE_SQL, paramSource);
+
+        return vet;
+    }
 
     // Not Implemented
 
@@ -140,16 +209,8 @@ public class VeterinarianRepository implements IVeterinarianRepository
 
 
     @Override
-    public <S extends Veterinarian> S save(S s)
-    {
-        throw new UnsupportedOperationException("Not Implemented yet");
-    }
-
-    @Override
     public <S extends Veterinarian> Iterable<S> saveAll(Iterable<S> iterable)
     {
         throw new UnsupportedOperationException("Not Implemented yet");
     }
-
-
 }

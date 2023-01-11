@@ -8,7 +8,7 @@
         <version>3.0.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.nuricanozturk</groupId>
+    <groupId>org.nuricanozturk.app.service.animalhospital.veterinarian</groupId>
     <artifactId>VeterinarianService</artifactId>
     <version>1.0.0</version>
     <name>animal-hospital</name>
@@ -39,12 +39,6 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.5.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.metemengen</groupId>
-            <artifactId>animal-hospital-repository-lib</artifactId>
-            <version>1.0.0</version>
         </dependency>
 
         <dependency>
