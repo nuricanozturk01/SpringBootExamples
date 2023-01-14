@@ -1,21 +1,25 @@
 package org.nuricanozturk.app.service.animalhospital.veterinarian.mapper;
 
-import com.metemengen.animalhospital.data.entity.Veterinarian;
+import com.metemengen.animalhospital.data.entity.VeterinarianWithoutCitizenId;
 import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.VeterinarianDTO;
+import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.VeterinarianWithoutCitizenIdDTO;
+import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.VeterinariansWithoutCitizenIdDTO;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Primary
-public class VeterinarianMapper implements IVeterinarianMapper
+public class VeterinarianWithoutCitizenIdMapper implements IVeterinarianWithoutCitizenIdMapper
 {
+
     @Override
-    public VeterinarianDTO toVeterinarianDTO(Veterinarian veterinarian)
+    public VeterinarianWithoutCitizenIdDTO toVeterinarianWithoutCitizenIdDTO(VeterinarianWithoutCitizenId veterinarian)
     {
-        var dto = new VeterinarianDTO();
+        var dto = new VeterinarianWithoutCitizenIdDTO();
 
         dto.diplomaNo = veterinarian.diplomaNo;
-        dto.citizenId = veterinarian.citizenId;
         dto.firstName = veterinarian.firstName;
         dto.middleName = veterinarian.middleName.orElse(null);
         dto.lastName = veterinarian.lastName;
@@ -24,4 +28,5 @@ public class VeterinarianMapper implements IVeterinarianMapper
 
         return dto;
     }
+
 }

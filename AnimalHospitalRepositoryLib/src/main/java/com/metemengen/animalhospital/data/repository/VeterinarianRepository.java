@@ -4,6 +4,7 @@ package com.metemengen.animalhospital.data.repository;
 
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.entity.Veterinarian;
+import com.metemengen.animalhospital.data.entity.VeterinarianWithoutCitizenId;
 import com.metemengen.animalhospital.data.mapper.IVeterinarianMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -99,6 +100,29 @@ public class VeterinarianRepository implements IVeterinarianRepository
             vets.add(getVeterinarian(rs));
         while (rs.next());
     }
+
+
+
+    private static VeterinarianWithoutCitizenId getVeterinarianWithouCitizenId(ResultSet rs) throws SQLException
+    {
+        // NUllable ve null ise default değere geri döner getXXX metodları
+
+        var dip = rs.getLong(1);
+        var firstName = rs.getString(3);
+        var middleNameOpt = Optional.ofNullable(rs.getString(4));
+        var lastName = rs.getString(5);
+        var birthDate = rs.getDate(6).toLocalDate(); // Date'i LocalDate'i çevirir
+        var regDate = rs.getDate(7).toLocalDate();
+        return new VeterinarianWithoutCitizenId(dip, firstName, middleNameOpt, lastName, birthDate, regDate);
+    }
+    private static void fillVeterinarianWithoutCitizenId(ResultSet rs, List<VeterinarianWithoutCitizenId> vets) throws SQLException
+    {
+        do
+            vets.add(getVeterinarianWithouCitizenId(rs));
+        while (rs.next());
+    }
+
+
     @Override
     public Optional<Veterinarian> finById(Long diplomaNo)
     {
@@ -169,10 +193,10 @@ public class VeterinarianRepository implements IVeterinarianRepository
     }
 
     @Override
-    public Iterable<Veterinarian> findByYearBetween(int beforeYear, int afterYear)
+    public Iterable<VeterinarianWithoutCitizenId> findByYearBetween(int beforeYear, int afterYear)
     {
         var paramMap = new HashMap<String, Object>();
-        var veterinarians = new ArrayList<Veterinarian>();
+        var veterinarians = new ArrayList<VeterinarianWithoutCitizenId>();
 
         paramMap.put("before", beforeYear);
         paramMap.put("after", afterYear);
@@ -205,57 +229,46 @@ public class VeterinarianRepository implements IVeterinarianRepository
     {
         throw new UnsupportedOperationException("Not Implemented yet");
     }
-
     @Override
     public void deleteAll()
     {
         throw new UnsupportedOperationException("Not Implemented yet");
     }
-
     @Override
     public void deleteAll(Iterable<? extends Veterinarian> iterable)
     {
         throw new UnsupportedOperationException("Not Implemented yet");
     }
-
     @Override
     public void deleteById(Iterable<? extends Long> iterable)
     {
         throw new UnsupportedOperationException("Not Implemented yet");
     }
-
     @Override
     public void deleteById(Long aLong)
     {
         throw new UnsupportedOperationException("Not Implemented yet");
     }
-
     @Override
     public boolean existById(Long aLong)
     {
         throw new UnsupportedOperationException("Not Implemented yet");
     }
-
     @Override
     public Iterable<Veterinarian> findAll()
     {
         throw new UnsupportedOperationException("Not Implemented yet");
     }
-
     @Override
     public Iterable<Veterinarian> findAllById(Iterable<Long> iterable)
     {
         throw new UnsupportedOperationException("Not Implemented yet");
     }
-
     @Override
     public Iterable<Veterinarian> findBy(Predicate<? extends Veterinarian> predicate)
     {
         throw new UnsupportedOperationException("Not Implemented yet");
     }
-
-
-
     @Override
     public <S extends Veterinarian> Iterable<S> saveAll(Iterable<S> iterable)
     {

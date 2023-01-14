@@ -1,7 +1,9 @@
 package com.metemengen.animalhospital.data.dal;
 
 import com.metemengen.animalhospital.data.BeanName;
+import com.metemengen.animalhospital.data.dto.VeterinarianSave;
 import com.metemengen.animalhospital.data.entity.Veterinarian;
+import com.metemengen.animalhospital.data.entity.VeterinarianWithoutCitizenId;
 import com.metemengen.animalhospital.data.repository.IVeterinarianRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -54,11 +56,11 @@ public class VeterinarianServiceHelper
         return m_veterinarianRepository.findByYear(year);
     }
 
-    public Iterable<Veterinarian> findVeterinariansByYearBetween(int before, int after)
+    public Iterable<VeterinarianWithoutCitizenId> findVeterinariansByYearBetween(int before, int after)
     {
         return m_veterinarianRepository.findByYearBetween(before, after);
     }
-    public Veterinarian save(Veterinarian veterinarian)
+    public Veterinarian save(VeterinarianSave veterinarian)
     {
         return m_veterinarianRepository.save(veterinarian);
     }

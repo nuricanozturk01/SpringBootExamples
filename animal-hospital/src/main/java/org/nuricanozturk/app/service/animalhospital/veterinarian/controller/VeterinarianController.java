@@ -2,6 +2,7 @@ package org.nuricanozturk.app.service.animalhospital.veterinarian.controller;
 
 import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.VeterinarianDTO;
 import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.VeterinariansDTO;
+import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.VeterinariansWithoutCitizenIdDTO;
 import org.nuricanozturk.app.service.animalhospital.veterinarian.service.VeterinarianService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,7 +58,7 @@ public class VeterinarianController
     }
 
     @GetMapping("between")
-    public VeterinariansDTO findByYearBetween(@RequestParam("y1") int year1, @RequestParam("y2") int year2)
+    public VeterinariansWithoutCitizenIdDTO findByYearBetween(@RequestParam("y1") int year1, @RequestParam("y2") int year2)
     {
         return m_veterinarianService.findVeterinariansByYearBetween(year1, year2);
     }

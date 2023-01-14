@@ -1,23 +1,21 @@
 package org.nuricanozturk.app.service.animalhospital.veterinarian.mapper;
 
-import com.metemengen.animalhospital.data.entity.Veterinarian;
-import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.VeterinarianDTO;
-import org.springframework.context.annotation.Primary;
+import com.metemengen.animalhospital.data.dto.VeterinarianSave;
+import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.VeterinarianSaveDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-@Primary
-public class VeterinarianMapper implements IVeterinarianMapper
+public class VeterinarianSaveMapper implements IVeterinarianSaveMapper
 {
     @Override
-    public VeterinarianDTO toVeterinarianDTO(Veterinarian veterinarian)
+    public VeterinarianSave toVeterinarianSave(VeterinarianSaveDTO veterinarian)
     {
-        var dto = new VeterinarianDTO();
+        var dto = new VeterinarianSave();
 
         dto.diplomaNo = veterinarian.diplomaNo;
         dto.citizenId = veterinarian.citizenId;
         dto.firstName = veterinarian.firstName;
-        dto.middleName = veterinarian.middleName.orElse(null);
+        dto.middleName = veterinarian.middleName;
         dto.lastName = veterinarian.lastName;
         dto.birthDate = veterinarian.birthDate;
         dto.registerDate = veterinarian.registerDate;

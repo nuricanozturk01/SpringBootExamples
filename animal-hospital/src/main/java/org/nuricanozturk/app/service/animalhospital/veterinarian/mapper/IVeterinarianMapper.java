@@ -5,11 +5,9 @@ import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.Veterinaria
 import org.nuricanozturk.app.service.animalhospital.veterinarian.dto.VeterinariansDTO;
 
 import java.util.List;
-
 public interface IVeterinarianMapper
 {
     VeterinarianDTO toVeterinarianDTO(Veterinarian veterinarian);
-
     default VeterinariansDTO toVeterinariansDTO(List<VeterinarianDTO> vets)
     {
         var dto = new VeterinariansDTO();
