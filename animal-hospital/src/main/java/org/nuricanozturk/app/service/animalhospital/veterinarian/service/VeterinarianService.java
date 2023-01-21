@@ -85,8 +85,9 @@ public class VeterinarianService
 
     public VeterinarianSaveDTO saveVeterinarian(VeterinarianSaveDTO veterinarianSaveDTO)
     {
+        m_veterinarianServiceHelper.save(m_veterinarianSaveMapper.toVeterinarianSave(veterinarianSaveDTO));
 
-        m_veterinarianSaveMapper.toVeterinarianSave(m_veterinarianServiceHelper.save(m_veterinarianSaveMapper.toVeterinarianSave(veterinarianSaveDTO)));
+        return veterinarianSaveDTO;
     }
 
 

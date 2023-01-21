@@ -11,4 +11,6 @@ import java.util.List;
 public interface IVeterinarianSaveMapper
 {
     VeterinarianSave toVeterinarianSave(VeterinarianSaveDTO veterinarian);
+
+
 }

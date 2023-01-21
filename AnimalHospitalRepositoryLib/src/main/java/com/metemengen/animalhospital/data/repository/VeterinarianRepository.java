@@ -202,7 +202,7 @@ public class VeterinarianRepository implements IVeterinarianRepository
         paramMap.put("after", afterYear);
 
         m_namedParameterJdbcTemplatee.query(FIND_BY_YEAR_BETWEEN, paramMap,
-                (ResultSet rs) -> fillVeterinarian(rs, veterinarians));
+                (ResultSet rs) -> fillVeterinarianWithoutCitizenId(rs, veterinarians));
 
         return veterinarians;
     }
@@ -210,7 +210,7 @@ public class VeterinarianRepository implements IVeterinarianRepository
     @Override
     public <S extends Veterinarian> S save(S vet)
     {
-        var paramSource = new BeanPropertySqlParameterSource(m_veterinarianMapper.toVeterinarianSave(vet));
+        var paramSource = new BeanPropertySqlParameterSource(vet);
 
         //isimler veterinarianEntityDTO ile aynı olacak
         paramSource.registerSqlType("birthDate", Types.DATE);

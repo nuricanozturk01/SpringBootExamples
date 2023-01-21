@@ -4,6 +4,7 @@ import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.dto.VeterinarianSave;
 import com.metemengen.animalhospital.data.entity.Veterinarian;
 import com.metemengen.animalhospital.data.entity.VeterinarianWithoutCitizenId;
+import com.metemengen.animalhospital.data.mapper.IVeterinarianMapper;
 import com.metemengen.animalhospital.data.repository.IVeterinarianRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -17,10 +18,13 @@ import java.util.Optional;
 public class VeterinarianServiceHelper
 {
     private final IVeterinarianRepository m_veterinarianRepository;
+    private final IVeterinarianMapper m_veterinarianMapper;
 
     public VeterinarianServiceHelper(
-            @Qualifier(BeanName.VETERINARIAN_REPOSITORY) IVeterinarianRepository m_veterinarianRepository)
+            @Qualifier(BeanName.VETERINARIAN_REPOSITORY) IVeterinarianRepository m_veterinarianRepository,
+            IVeterinarianMapper veterinarianMapper)
     {
+        this.m_veterinarianMapper = veterinarianMapper;
         this.m_veterinarianRepository = m_veterinarianRepository;
     }
 
@@ -60,8 +64,10 @@ public class VeterinarianServiceHelper
     {
         return m_veterinarianRepository.findByYearBetween(before, after);
     }
-    public Veterinarian save(VeterinarianSave veterinarian)
+    public VeterinarianSave save(VeterinarianSave veterinarian)
     {
-        return m_veterinarianRepository.save(veterinarian);
+        m_veterinarianRepository.save(m_veterinarianMapper.toVeterinarian(veterinarian));
+
+        return veterinarian;
     }
 }
