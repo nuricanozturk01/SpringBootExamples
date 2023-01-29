@@ -8,11 +8,16 @@
 		<version>3.0.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<groupId>org.csystem</groupId>
+	<artifactId>VeterinarianServiceApp</artifactId>
+	<version>6.0.0</version>
+	<name>VeterinarianServiceApp</name>
 
-	<groupId>com.metemengen</groupId>
-	<artifactId>com-metemengen-library-animalhospital-repository</artifactId>
-	<version>1.1.0</version>
-	<name>com-metemengen-library-animalhospital-repository</name>
+	<properties>
+		<java.version>17</java.version>
+		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+	</properties>
+
 
 	<repositories>
 		<repository>
@@ -20,12 +25,6 @@
 			<url>https://raw.github.com/oguzkaran/javaapp1-jun-2022-maven-repo/main</url>
 		</repository>
 	</repositories>
-
-	<properties>
-		<java.version>17</java.version>
-		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
-	</properties>
-
 
 	<dependencies>
 		<dependency>
@@ -35,7 +34,18 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.5.1</version>
 		</dependency>
 
 		<dependency>
@@ -56,15 +66,36 @@
 			<version>6.0.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.metemengen</groupId>
+			<artifactId>com-metemengen-library-animalhospital-repository</artifactId>
+			<version>1.1.0</version>
+		</dependency>
 
+		<dependency>
+			<groupId>org.csystem</groupId>
+			<artifactId>org-csystem-util-collection</artifactId>
+			<version>6.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.csystem</groupId>
+			<artifactId>org-csystem-util-console</artifactId>
+			<version>6.2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.2.0</version>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

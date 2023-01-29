@@ -1,11 +1,14 @@
 package com.metemengen.animalhospital.data.mapper;
 
-import com.metemengen.animalhospital.data.dto.VeterinarianSave;
+import com.karandev.util.mapstruct.IOptionalMapper;
 import com.metemengen.animalhospital.data.entity.Veterinarian;
+import com.metemengen.animalhospital.data.entity.VeterinarianSave;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-
-public interface IVeterinarianMapper
-{
-    VeterinarianSave toVeterinarianSave(Veterinarian veterinarian);
+@Mapper(implementationName = "VeterinarianMapperImpl")
+public interface IVeterinarianMapper extends IOptionalMapper {
+    @Mapping(source = "middleName", target = "middleNameOpt", qualifiedByName = "toOptional")
+    @Mapping(source = "middleName", target = "middleName", ignore = true)
     Veterinarian toVeterinarian(VeterinarianSave veterinarianSave);
 }
