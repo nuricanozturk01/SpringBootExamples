@@ -56,4 +56,16 @@ public class VeterinarianController {
     {
         throw new UnsupportedOperationException("TODO:");
     }
+
+    @GetMapping("year")
+    public VeterinariansDTO findVeterinariansByYear(@RequestParam("y") int year)
+    {
+        return m_veterinarianService.findVeterinarianByYear(year);
+    }
+
+    @GetMapping("month")
+    public VeterinariansDTO findVeterinariansByMonth(@RequestParam("m") int month)
+    {
+        return m_veterinarianService.findVeterinarianByMonth(month);
+    }
 }

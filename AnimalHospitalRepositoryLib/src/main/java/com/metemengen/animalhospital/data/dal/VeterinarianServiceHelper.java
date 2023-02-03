@@ -71,4 +71,14 @@ public class VeterinarianServiceHelper {
     {
         return m_animalRepository.findByDiplomaNo(diplomaNo);
     }
+
+    public Iterable<Veterinarian> findVeterinariansByYear(int year)
+    {
+        return m_veterinarianRepository.findByYear(year);
+    }
+
+    public Iterable<Veterinarian> findVeterinariansByMonth(int month)
+    {
+        return m_veterinarianRepository.findByMonth(month);
+    }
 }

@@ -5,7 +5,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.*;
 
 @Configuration
-public class MapperConfig {
+public class MapperConfig
+{
     @Bean
     @Primary
     public IVeterinarianMapper getMapper()

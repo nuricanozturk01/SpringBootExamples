@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Service
 public class VeterinarianService {
@@ -62,6 +63,21 @@ public class VeterinarianService {
         m_veterinarianServiceHelper.save(m_veterinarianSaveMapper.toVeterinarianSave(veterinarianSaveDTO));
 
         return veterinarianSaveDTO;
+    }
+
+    public VeterinariansDTO findVeterinarianByYear(int year)
+    {
+        return m_veterinarianMapper.toVeterinariansDTO(StreamSupport.stream(m_veterinarianServiceHelper.findVeterinariansByYear(year).spliterator(), false)
+                .map(m_veterinarianMapper::toVeterinarianDTO).toList());
+    }
+
+    public VeterinariansDTO findVeterinarianByMonth(int month)
+    {
+        return m_veterinarianMapper.toVeterinariansDTO
+                (CollectionUtil.toList(m_veterinarianServiceHelper.findVeterinariansByMonth(month),
+                        m_veterinarianMapper::toVeterinarianDTO));
+       /* return m_veterinarianMapper.toVeterinariansDTO(StreamSupport.stream(m_veterinarianServiceHelper.findVeterinariansByMonth(month).spliterator(), false)
+                .map(m_veterinarianMapper::toVeterinarianDTO).toList());*/
     }
 
     //...

@@ -35,6 +35,10 @@ public class VeterinarianRepository implements IVeterinarianRepository {
                 select diploma_no, first_name, middle_name, last_name, birth_date, register_date\s
                 from veterinarians where date_part('month', register_date) = :month
                 """;
+
+    private static final String FIND_BY_MONTH_SQL_2 = """
+                select * from veterinarians where date_part('month', register_date) = :month
+                """;
     private static final String FIND_BY_YEAR_SQL = "select * from veterinarians where date_part('year', register_date) = :year";
 
 
@@ -158,13 +162,27 @@ public class VeterinarianRepository implements IVeterinarianRepository {
     @Override
     public Iterable<Veterinarian> findByMonth(int month)
     {
-        throw new UnsupportedOperationException("Not implemented yet");
+        var paramMap = new HashMap<String, Object>();
+        var veterinarians = new ArrayList<Veterinarian>();
+
+        paramMap.put("month", month);
+
+        m_namedParameterJdbcTemplate.query(FIND_BY_MONTH_SQL_2, paramMap, (ResultSet rs) -> fillVeterinarians(rs, veterinarians));
+
+        return veterinarians;
     }
 
     @Override
     public Iterable<Veterinarian> findByYear(int year)
     {
-        throw new UnsupportedOperationException("Not implemented yet");
+        var paramMap = new HashMap<String, Object>();
+        var veterinarians = new ArrayList<Veterinarian>();
+
+        paramMap.put("year", year);
+
+        m_namedParameterJdbcTemplate.query(FIND_BY_YEAR_SQL, paramMap, (ResultSet rs) -> fillVeterinarians(rs, veterinarians));
+
+        return veterinarians;
     }
 
     @Override
