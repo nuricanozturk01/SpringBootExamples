@@ -1,10 +1,7 @@
 package com.metemengen.animalhospital.data.dal;
 
 import com.metemengen.animalhospital.data.BeanName;
-import com.metemengen.animalhospital.data.entity.AnimalOwnerDetails;
-import com.metemengen.animalhospital.data.entity.Veterinarian;
-import com.metemengen.animalhospital.data.entity.VeterinarianSave;
-import com.metemengen.animalhospital.data.entity.VeterinarianWithoutCitizenId;
+import com.metemengen.animalhospital.data.entity.*;
 import com.metemengen.animalhospital.data.mapper.IVeterinarianMapper;
 import com.metemengen.animalhospital.data.repository.IAnimalRepository;
 import com.metemengen.animalhospital.data.repository.IVeterinarianRepository;
@@ -54,7 +51,7 @@ public class VeterinarianServiceHelper {
         return m_veterinarianRepository.findByMonthAndYear(month, year);
     }
 
-    public Iterable<VeterinarianWithoutCitizenId> findVeterinariansByYearBetween(int begin, int end)
+    public Iterable<VeterinarianWithFullNameDTO> findVeterinariansByYearBetween(int begin, int end)
     {
         //...
         return m_veterinarianRepository.findByYearBetween(begin, end);

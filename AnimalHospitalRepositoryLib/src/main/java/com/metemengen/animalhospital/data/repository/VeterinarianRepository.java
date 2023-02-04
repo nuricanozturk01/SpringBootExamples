@@ -2,6 +2,7 @@ package com.metemengen.animalhospital.data.repository;
 
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.entity.Veterinarian;
+import com.metemengen.animalhospital.data.entity.VeterinarianWithFullNameDTO;
 import com.metemengen.animalhospital.data.entity.VeterinarianWithoutCitizenId;
 import com.metemengen.animalhospital.data.mapper.IVeterinarianMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,12 +29,14 @@ public class VeterinarianRepository implements IVeterinarianRepository {
             and date_part('year', register_date) = :year""";
 
     private static final String FIND_BY_YEAR_BETWEEN_SQL = """
-            select diploma_no, first_name, middle_name, last_name, birth_date, register_date\s
-            from veterinarians where date_part('year', register_date) between :begin and :end
+           select * from find_veterinarian_by_year_between(:begin, :end)
             """;
     private static final String FIND_BY_MONTH_SQL = """
                 select diploma_no, first_name, middle_name, last_name, birth_date, register_date\s
                 from veterinarians where date_part('month', register_date) = :month
+                """;
+    private static final String FIND_BY_MONTH_SQL_3 = """
+                select * from find_
                 """;
 
     private static final String FIND_BY_MONTH_SQL_2 = """
@@ -62,6 +65,16 @@ public class VeterinarianRepository implements IVeterinarianRepository {
         return new Veterinarian(diplomaNo, citizenId, firstName, middleNameOpt, lastName, birthDate, registerDate);
     }
 
+    private static VeterinarianWithFullNameDTO getVeterinarianWithFullName(ResultSet rs) throws SQLException
+    {
+        var diplomaNo = rs.getLong(1);
+        var fullName = rs.getString(2);
+        var birthDate = rs.getDate(6).toLocalDate();
+        var registerDate = rs.getDate(7).toLocalDate();
+
+        return new VeterinarianWithFullNameDTO(diplomaNo, fullName, birthDate, registerDate);
+    }
+
     private static VeterinarianWithoutCitizenId getVeterinarianWithoutCitizenId(ResultSet rs) throws SQLException
     {
         var diplomaNo = rs.getLong("diploma_no");
@@ -85,6 +98,13 @@ public class VeterinarianRepository implements IVeterinarianRepository {
     {
         do
             veterinarians.add(getVeterinarianWithoutCitizenId(rs));
+        while (rs.next());
+    }
+
+    private static void fillVeterinariansWithFullName(ResultSet rs, List<VeterinarianWithFullNameDTO> veterinarians) throws SQLException
+    {
+        do
+            veterinarians.add(getVeterinarianWithFullName(rs));
         while (rs.next());
     }
 
@@ -146,15 +166,15 @@ public class VeterinarianRepository implements IVeterinarianRepository {
     }
 
     @Override
-    public Iterable<VeterinarianWithoutCitizenId> findByYearBetween(int begin, int end)
+    public Iterable<VeterinarianWithFullNameDTO> findByYearBetween(int begin, int end)
     {
         var paramMap = new HashMap<String, Object>();
-        var veterinarians = new ArrayList<VeterinarianWithoutCitizenId>();
+        var veterinarians = new ArrayList<VeterinarianWithFullNameDTO>();
 
         paramMap.put("begin", begin);
         paramMap.put("end", end);
 
-        m_namedParameterJdbcTemplate.query(FIND_BY_YEAR_BETWEEN_SQL, paramMap, (ResultSet rs) -> fillVeterinariansWithoutCitizenId(rs, veterinarians));
+        m_namedParameterJdbcTemplate.query(FIND_BY_YEAR_BETWEEN_SQL, paramMap, (ResultSet rs) -> fillVeterinariansWithFullName(rs, veterinarians));
 
         return veterinarians;
     }
