@@ -4,7 +4,7 @@ package com.metemengen.animalhospital.data.entity;
 
 import java.time.LocalDate;
 
-public class VeterinarianWithFullNameDTO
+public class VeterinarianWithFullName
 {
     public long diplomaNo;
     public String fullName;
@@ -12,7 +12,7 @@ public class VeterinarianWithFullNameDTO
     public LocalDate registerDate;
 
 
-    public VeterinarianWithFullNameDTO(long diplomaNo, String fullName, LocalDate birthDate, LocalDate registerDate)
+    public VeterinarianWithFullName(long diplomaNo, String fullName, LocalDate birthDate, LocalDate registerDate)
     {
         this.diplomaNo = diplomaNo;
         this.fullName = fullName;

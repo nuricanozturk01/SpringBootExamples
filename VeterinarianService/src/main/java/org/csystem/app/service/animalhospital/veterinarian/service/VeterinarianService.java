@@ -2,6 +2,7 @@ package org.csystem.app.service.animalhospital.veterinarian.service;
 
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.dal.VeterinarianServiceHelper;
+
 import org.csystem.app.service.animalhospital.veterinarian.dto.*;
 import org.csystem.app.service.animalhospital.veterinarian.mapper.IVeterinarianMapper;
 import org.csystem.app.service.animalhospital.veterinarian.mapper.IVeterinarianSaveMapper;
@@ -61,8 +62,8 @@ public class VeterinarianService
 
     public VeterinariansWithFullNameDTO findVeterinariansByYearBetween(int begin, int end)
     {
-        List<VeterinarianWithFullNameDTO> list = StreamSupport.stream(m_veterinarianServiceHelper.findVeterinariansByYearBetween(begin,end).spliterator(), false).toList();
-        return m_veterinarianWithFullNameMapper.toVeterinariansWithFullName(list);
+        return m_veterinarianWithFullNameMapper.toVeterinariansWithFullName(CollectionUtil.toList(m_veterinarianServiceHelper.findVeterinariansByYearBetween(begin,end),
+                m_veterinarianWithFullNameMapper::toVeterinarianWithFullName));
     }
 
     public VeterinarianSaveDTO saveVeterinarian(VeterinarianSaveDTO veterinarianSaveDTO)

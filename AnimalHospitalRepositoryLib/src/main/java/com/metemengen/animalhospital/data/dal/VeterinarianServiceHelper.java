@@ -51,7 +51,7 @@ public class VeterinarianServiceHelper {
         return m_veterinarianRepository.findByMonthAndYear(month, year);
     }
 
-    public Iterable<VeterinarianWithFullNameDTO> findVeterinariansByYearBetween(int begin, int end)
+    public Iterable<VeterinarianWithFullName> findVeterinariansByYearBetween(int begin, int end)
     {
         //...
         return m_veterinarianRepository.findByYearBetween(begin, end);

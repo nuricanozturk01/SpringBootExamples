@@ -2,7 +2,7 @@ package com.metemengen.animalhospital.data.repository;
 
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.entity.Veterinarian;
-import com.metemengen.animalhospital.data.entity.VeterinarianWithFullNameDTO;
+import com.metemengen.animalhospital.data.entity.VeterinarianWithFullName;
 import com.metemengen.animalhospital.data.entity.VeterinarianWithoutCitizenId;
 import com.metemengen.animalhospital.data.mapper.IVeterinarianMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -65,14 +65,14 @@ public class VeterinarianRepository implements IVeterinarianRepository {
         return new Veterinarian(diplomaNo, citizenId, firstName, middleNameOpt, lastName, birthDate, registerDate);
     }
 
-    private static VeterinarianWithFullNameDTO getVeterinarianWithFullName(ResultSet rs) throws SQLException
+    private static VeterinarianWithFullName getVeterinarianWithFullName(ResultSet rs) throws SQLException
     {
         var diplomaNo = rs.getLong(1);
         var fullName = rs.getString(2);
-        var birthDate = rs.getDate(6).toLocalDate();
-        var registerDate = rs.getDate(7).toLocalDate();
+        var birthDate = rs.getDate(3).toLocalDate();
+        var registerDate = rs.getDate(4).toLocalDate();
 
-        return new VeterinarianWithFullNameDTO(diplomaNo, fullName, birthDate, registerDate);
+        return new VeterinarianWithFullName(diplomaNo, fullName, birthDate, registerDate);
     }
 
     private static VeterinarianWithoutCitizenId getVeterinarianWithoutCitizenId(ResultSet rs) throws SQLException
@@ -101,7 +101,7 @@ public class VeterinarianRepository implements IVeterinarianRepository {
         while (rs.next());
     }
 
-    private static void fillVeterinariansWithFullName(ResultSet rs, List<VeterinarianWithFullNameDTO> veterinarians) throws SQLException
+    private static void fillVeterinariansWithFullName(ResultSet rs, List<VeterinarianWithFullName> veterinarians) throws SQLException
     {
         do
             veterinarians.add(getVeterinarianWithFullName(rs));
@@ -166,10 +166,10 @@ public class VeterinarianRepository implements IVeterinarianRepository {
     }
 
     @Override
-    public Iterable<VeterinarianWithFullNameDTO> findByYearBetween(int begin, int end)
+    public Iterable<VeterinarianWithFullName> findByYearBetween(int begin, int end)
     {
         var paramMap = new HashMap<String, Object>();
-        var veterinarians = new ArrayList<VeterinarianWithFullNameDTO>();
+        var veterinarians = new ArrayList<VeterinarianWithFullName>();
 
         paramMap.put("begin", begin);
         paramMap.put("end", end);
