@@ -21,21 +21,17 @@ public class VeterinarianService
 {
     private final VeterinarianServiceHelper m_veterinarianServiceHelper;
     private final IVeterinarianMapper m_veterinarianMapper;
-    private final IVeterinarianWithoutCitizenIdMapper m_veterinarianWithoutCitizenIdMapper;
     private final IVeterinarianSaveMapper m_veterinarianSaveMapper;
-
     private final IVeterinarianWithFullNameMapper m_veterinarianWithFullNameMapper;
 
     public VeterinarianService(@Qualifier(BeanName.VETERINARIAN_SERVICE_HELPER) VeterinarianServiceHelper veterinarianServiceHelper,
                                IVeterinarianMapper veterinarianMapper,
-                               IVeterinarianWithoutCitizenIdMapper veterinarianWithoutCitizenIdMapper,
                                IVeterinarianSaveMapper veterinarianSaveMapper,
                                IVeterinarianWithFullNameMapper veterinarianWithFullNameMapper)
     {
         m_veterinarianWithFullNameMapper = veterinarianWithFullNameMapper;
         m_veterinarianServiceHelper = veterinarianServiceHelper;
         m_veterinarianMapper = veterinarianMapper;
-        m_veterinarianWithoutCitizenIdMapper = veterinarianWithoutCitizenIdMapper;
         m_veterinarianSaveMapper = veterinarianSaveMapper;
     }
 

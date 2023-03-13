@@ -9,7 +9,6 @@ import org.csystem.app.service.animalhospital.veterinarian.dto.VeterinariansWith
 import org.csystem.app.service.animalhospital.veterinarian.dto.VeterinariansWithoutCitizenIdDTO;
 import org.mapstruct.Mapper;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Mapper(implementationName = "VeterinarianWithFullNameMapperImpl", componentModel = "spring")

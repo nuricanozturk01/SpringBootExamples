@@ -1,7 +1,5 @@
 package com.metemengen.animalhospital.data.entity;
 
-
-
 import java.time.LocalDate;
 
 public class VeterinarianWithFullName
