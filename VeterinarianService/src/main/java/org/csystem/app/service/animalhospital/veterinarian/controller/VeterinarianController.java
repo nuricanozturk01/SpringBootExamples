@@ -1,7 +1,9 @@
 package org.csystem.app.service.animalhospital.veterinarian.controller;
 
+import com.metemengen.animalhospital.data.BeanName;
 import org.csystem.app.service.animalhospital.veterinarian.dto.*;
 import org.csystem.app.service.animalhospital.veterinarian.service.VeterinarianService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,11 +53,7 @@ public class VeterinarianController {
         return m_veterinarianService.saveVeterinarian(veterinarianSave);
     }
 
-    @GetMapping("vet/animalsowners/diploma")
-    public  AnimalsOwnerDetailsDTO findByAnimalsOwnersByDiplomaNo(@RequestParam("no") long diplomaNo)
-    {
-        throw new UnsupportedOperationException("TODO:");
-    }
+
 
     @GetMapping("year")
     public VeterinariansDTO findVeterinariansByYear(@RequestParam("y") int year)

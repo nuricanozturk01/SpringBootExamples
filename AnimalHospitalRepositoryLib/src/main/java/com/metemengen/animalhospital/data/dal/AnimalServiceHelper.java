@@ -1,5 +1,6 @@
 package com.metemengen.animalhospital.data.dal;
 
+import com.metemengen.animalhospital.data.entity.AnimalOwnerDetails;
 import com.metemengen.animalhospital.data.repository.IAnimalRepository;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,5 +17,10 @@ public class AnimalServiceHelper
     public AnimalServiceHelper(@Qualifier(ANIMAL_REPOSITORY) IAnimalRepository animalRepository)
     {
         m_animalRepository = animalRepository;
+    }
+
+    public Iterable<AnimalOwnerDetails> findByDiplomaNo(long diplomaNo)
+    {
+        return m_animalRepository.findByDiplomaNo(diplomaNo);
     }
 }

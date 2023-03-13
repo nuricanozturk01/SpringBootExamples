@@ -13,16 +13,13 @@ import java.util.Optional;
 @Component(BeanName.VETERINARIAN_SERVICE_HELPER)
 public class VeterinarianServiceHelper {
     private final IVeterinarianRepository m_veterinarianRepository;
-    private final IAnimalRepository m_animalRepository;
 
     private final IVeterinarianMapper m_veterinarianMapper;
 
     public VeterinarianServiceHelper(@Qualifier(BeanName.VETERINARIAN_REPOSITORY) IVeterinarianRepository veterinarianRepository,
-                                     @Qualifier(BeanName.ANIMAL_REPOSITORY) IAnimalRepository animalRepository,
                                      @Qualifier(BeanName.VETERINARIAN_MAPPER) IVeterinarianMapper veterinarianMapper)
     {
         m_veterinarianRepository = veterinarianRepository;
-        m_animalRepository = animalRepository;
         m_veterinarianMapper = veterinarianMapper;
     }
 
@@ -64,10 +61,6 @@ public class VeterinarianServiceHelper {
         return veterinarianDTO;
     }
 
-    public Iterable<AnimalOwnerDetails> findAnimalOwnerDetailsByDiplomaNo(long diplomaNo)
-    {
-        return m_animalRepository.findByDiplomaNo(diplomaNo);
-    }
 
     public Iterable<Veterinarian> findVeterinariansByYear(int year)
     {
