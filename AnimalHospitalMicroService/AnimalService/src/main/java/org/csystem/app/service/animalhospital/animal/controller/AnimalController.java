@@ -1,5 +1,6 @@
 package org.csystem.app.service.animalhospital.animal.controller;
 
+import org.csystem.app.service.animalhospital.animal.dto.AnimalsDTO;
 import org.csystem.app.service.animalhospital.animal.dto.AnimalsOwnerDetailsDTO;
 import org.csystem.app.service.animalhospital.animal.service.AnimalAppService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,9 @@ public class AnimalController {
         m_animalAppService = animalAppService;
     }
 
-    @GetMapping("owners/diploma")
-    public AnimalsOwnerDetailsDTO findByAnimalsOwnersByDiplomaNo(@RequestParam("no") long diplomaNo)
+    @GetMapping("contains/sterile/name")
+    public AnimalsDTO findByAnimalsOwnersByDiplomaNo(@RequestParam("name") String name)
     {
-        return m_animalAppService.findByAnimalsOwnersByDiplomaNo(diplomaNo);
+        return m_animalAppService.findByNameContainsAndSterile(name, true);
     }
 }

@@ -8,9 +8,9 @@
         <version>6.0.0</version>
         <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.csytem</groupId>
-    <artifactId>VeterinarianGetService</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+
+    <artifactId>VeterinarianGetServiceApp</artifactId>
+    <version>1.0.0</version>
     <name>VeterinarianGetService</name>
 
     <description>VeterinarianGetService</description>
@@ -22,8 +22,8 @@
     <dependencies>
         <dependency>
             <groupId>com.metemengen</groupId>
-            <artifactId>RepositoryLib</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <artifactId>com-metemengen-library-animalhospital-repository</artifactId>
+            <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
 

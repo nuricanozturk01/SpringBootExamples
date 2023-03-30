@@ -1,10 +1,10 @@
-package org.csystem.animalservice;
+package org.csystem.app.service.animalhospital.animal;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AnimalServiceApplicationTests
+class AnimalServiceAppTest
 {
 
     @Test

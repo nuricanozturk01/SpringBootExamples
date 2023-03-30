@@ -10,9 +10,10 @@
     </parent>
 
     <groupId>com.metemengen</groupId>
-    <artifactId>RepositoryLib</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>RepositoryLib</name>
+    <artifactId>com-metemengen-library-animalhospital-repository</artifactId>
+    <version>1.0.0</version>
+    <name>com-metemengen-library-animalhospital-repository</name>
+
 
     <dependencies>
         <dependency>
