@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.csystem</groupId>
-	<artifactId>VeterinarianServiceApp</artifactId>
+	<artifactId>VeterinarianPostServiceApp</artifactId>
 	<version>6.0.0</version>
 	<name>VeterinarianServiceApp</name>
 
