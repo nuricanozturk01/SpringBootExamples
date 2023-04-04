@@ -9,6 +9,8 @@ import org.csystem.util.collection.CollectionUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.StreamSupport;
+
 @Service
 public class OwnerService
 {
@@ -25,6 +27,6 @@ public class OwnerService
 
     public OwnersDTO findOwnersByPhone(String phone)
     {
-        return m_ownerMapper.toOwnersDTO(CollectionUtil.toList(m_animalOwnerServiceHelper.findByPhone(phone), m_ownerMapper::toOwnerDTO));
+        return m_ownerMapper.toOwnersDTO(StreamSupport.stream(m_animalOwnerServiceHelper.findByPhone(phone).spliterator(), false).toList());
     }
 }

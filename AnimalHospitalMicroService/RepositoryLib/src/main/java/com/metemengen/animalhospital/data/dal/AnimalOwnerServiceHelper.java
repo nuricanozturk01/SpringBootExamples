@@ -2,6 +2,7 @@ package com.metemengen.animalhospital.data.dal;
 
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.entity.Owner;
+import com.metemengen.animalhospital.data.entity.OwnerAnimalDetails;
 import com.metemengen.animalhospital.data.repository.IAnimalOwnerRepository;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,8 +21,8 @@ public class AnimalOwnerServiceHelper
         m_animalOwnerRepository = animalOwnerRepository;
     }
 
-    public Iterable<Owner> findByPhone(String phone)
+    public Iterable<OwnerAnimalDetails> findByPhone(String phone)
     {
-        return m_animalOwnerRepository.findByPhone(phone);
+            return m_animalOwnerRepository.findByPhone(phone);
     }
 }
