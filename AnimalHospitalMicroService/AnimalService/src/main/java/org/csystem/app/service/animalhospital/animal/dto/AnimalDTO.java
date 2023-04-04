@@ -10,20 +10,9 @@ import java.util.Set;
 
 public class AnimalDTO
 {
-
     public int id;
-
-
     public String name;
-
     public String type;
-
-
     public LocalDate birthDate;
-
-
     public boolean sterile;
-
-
-
 }

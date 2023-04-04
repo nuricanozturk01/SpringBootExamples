@@ -15,7 +15,6 @@
     <description>VeterinarianPostService</description>
 
     <dependencies>
-
         <dependency>
             <groupId>com.metemengen</groupId>
             <artifactId>com-metemengen-library-animalhospital-repository</artifactId>

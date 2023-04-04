@@ -23,9 +23,19 @@ public class AnimalAppService {
         m_animalMapper = animalMapper;
     }
 
-    public AnimalsDTO findByNameContainsAndSterile(@RequestParam("name") String name, @RequestParam("sterile") boolean sterile)
+    public AnimalsDTO findByNameContainsAndSterile(String name, boolean sterile)
     {
-        return m_animalMapper.toAnimalsDTO(toList(m_animalServiceHelper.findByNameContainsAndSterile(name, sterile),
+        return m_animalMapper.toAnimalsDTO(toList(m_animalServiceHelper.findAnimalsByNameContainsAndSterile(name, sterile),
                 m_animalMapper::toAnimalDTO));
+    }
+
+    public AnimalsDTO findByType(String type)
+    {
+        return m_animalMapper.toAnimalsDTO(toList(m_animalServiceHelper.findAnimalsByType(type), m_animalMapper::toAnimalDTO));
+    }
+
+    public AnimalsDTO findByMonthAndYear(int mon, int year)
+    {
+        return m_animalMapper.toAnimalsDTO(toList(m_animalServiceHelper.findAnimalsByMonthAndYear(mon, year), m_animalMapper::toAnimalDTO));
     }
 }

@@ -7,11 +7,13 @@ import com.metemengen.animalhospital.data.entity.VeterinarianWithFullName;
 import com.metemengen.animalhospital.data.mapper.IVeterinarianMapper;
 import com.metemengen.animalhospital.data.repository.IVeterinarianRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component(BeanName.VETERINARIAN_SERVICE_HELPER)
+@Lazy
 public class VeterinarianServiceHelper {
     private final IVeterinarianRepository m_veterinarianRepository;
 

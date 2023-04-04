@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/animals")
-public class AnimalController {
+public class AnimalController
+{
     private final AnimalAppService m_animalAppService;
 
     public AnimalController(AnimalAppService animalAppService)
@@ -23,4 +24,17 @@ public class AnimalController {
     {
         return m_animalAppService.findByNameContainsAndSterile(name, true);
     }
+
+    @GetMapping("find/mon/year")
+    public AnimalsDTO findByMonthAndYear(@RequestParam("mon") int mon, @RequestParam("year") int year)
+    {
+        return m_animalAppService.findByMonthAndYear(mon, year);
+    }
+
+    @GetMapping("find/type")
+    public AnimalsDTO findByType(@RequestParam("type") String type)
+    {
+        return m_animalAppService.findByType(type);
+    }
+
 }

@@ -1,4 +1,4 @@
-package org.csystem.app.service.animalhospital.veterinarian;
+package org.csystem.app.service.animalhospital.owner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,9 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan({"org.csystem", "com.metemengen"})
 @EnableJpaRepositories(basePackages = "com.metemengen")
 @EntityScan(basePackages = "com.metemengen")
-public class App {
-	public static void main(String[] args)
-	{
-		SpringApplication.run(App.class, args);
+public class OwnerGetServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(OwnerGetServiceApplication.class, args);
 	}
+
 }

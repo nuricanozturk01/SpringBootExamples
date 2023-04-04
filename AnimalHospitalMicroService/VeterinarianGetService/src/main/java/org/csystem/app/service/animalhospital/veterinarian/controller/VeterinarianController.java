@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/vets/get")
-public class VeterinarianController {
+public class VeterinarianController
+{
     private final VeterinarianService m_veterinarianService;
 
     public VeterinarianController(VeterinarianService veterinarianService)
@@ -40,13 +41,13 @@ public class VeterinarianController {
     }
 
     @GetMapping("monthyear")
-    public VeterinariansDTO findByMonthAndYear(@RequestParam("m") int month, @RequestParam("y")int year)
+    public VeterinariansDTO findByMonthAndYear(@RequestParam("m") int month, @RequestParam("y") int year)
     {
         return m_veterinarianService.findVeterinariansByMonthAndYear(month, year);
     }
 
     @GetMapping("between/year")
-    public VeterinariansWithFullNameDTO findByYearBetween(@RequestParam("begin") int begin, @RequestParam("end")int end)
+    public VeterinariansWithFullNameDTO findByYearBetween(@RequestParam("begin") int begin, @RequestParam("end") int end)
     {
         return m_veterinarianService.findVeterinariansByYearBetween(begin, end);
     }
@@ -56,7 +57,6 @@ public class VeterinarianController {
     {
         return m_veterinarianService.saveVeterinarian(veterinarianSave);
     }*/
-
 
 
     @GetMapping("year")

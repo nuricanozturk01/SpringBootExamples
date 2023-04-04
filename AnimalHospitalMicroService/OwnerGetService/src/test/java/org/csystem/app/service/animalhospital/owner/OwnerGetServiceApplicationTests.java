@@ -1,10 +1,10 @@
-package org.csystem.app.service.animalhospital.veterinarian;
+package org.csystem.app.service.animalhospital.owner;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AppTests {
+class OwnerGetServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
