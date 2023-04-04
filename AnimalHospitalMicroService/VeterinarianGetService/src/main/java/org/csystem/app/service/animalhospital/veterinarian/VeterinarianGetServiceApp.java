@@ -8,8 +8,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan({"org.csystem", "com.metemengen"})
-public class VeterinarianGetServiceApp
-{
+@EnableJpaRepositories(basePackages = "com.metemengen")
+@EntityScan(basePackages = "com.metemengen")
+public class VeterinarianGetServiceApp {
 	public static void main(String[] args)
 	{
 		SpringApplication.run(VeterinarianGetServiceApp.class, args);
