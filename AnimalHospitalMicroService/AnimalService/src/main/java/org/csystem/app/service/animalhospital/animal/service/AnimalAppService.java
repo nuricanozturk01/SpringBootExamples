@@ -2,6 +2,7 @@ package org.csystem.app.service.animalhospital.animal.service;
 
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.dal.AnimalServiceHelper;
+import com.metemengen.animalhospital.data.entity.orm.dto.AnimalOwnerDetails;
 import org.csystem.app.service.animalhospital.animal.dto.AnimalsDTO;
 import org.csystem.app.service.animalhospital.animal.dto.AnimalsOwnerDetailsDTO;
 import org.csystem.app.service.animalhospital.animal.dto.AnimalsWithoutOwnerDTO;
@@ -9,6 +10,7 @@ import org.csystem.app.service.animalhospital.animal.mapper.IAnimalMapper;
 import org.csystem.app.service.animalhospital.animal.mapper.IAnimalOwnerDetailsMapper;
 import org.csystem.app.service.animalhospital.animal.mapper.IAnimalWithoutOwnerMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -53,5 +55,9 @@ public class AnimalAppService {
     public AnimalsOwnerDetailsDTO findByName(String name)
     {
         return m_animalOwnerDetailsMapper.toAnimalsOwnerDetailsDTO(StreamSupport.stream(m_animalServiceHelper.findByName(name).spliterator(), false).toList());
+    }
+    public AnimalsOwnerDetailsDTO findByVeterinarianDiplomaNo(long no)
+    {
+        return m_animalOwnerDetailsMapper.toAnimalsOwnerDetailsDTO(StreamSupport.stream(m_animalServiceHelper.findByVeterinarianDiplomaNo(no).spliterator(), false).toList());
     }
 }

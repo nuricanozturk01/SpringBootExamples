@@ -39,4 +39,10 @@ public class AnimalController
     {
         return m_animalAppService.findByName(name);
     }
+
+    @GetMapping("/find/diploma")
+    public AnimalsOwnerDetailsDTO findByDiplomaNo(@RequestParam("n") long n)
+    {
+        return m_animalAppService.findByVeterinarianDiplomaNo(n);
+    }
 }

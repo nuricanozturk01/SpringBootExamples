@@ -2,6 +2,7 @@ package com.metemengen.animalhospital.data.entity.orm;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "animals")
@@ -28,7 +29,8 @@ public class Animal
     //@JsonIgnore
     public Owner owner;
 
-
+    @ManyToMany(mappedBy = "animals", fetch = FetchType.LAZY) // mapped_by karşı taraf ile ilişkili olduğu durun
+    public Set<Veterinarian> veterinarians;
     @Override
     public int hashCode()
     {

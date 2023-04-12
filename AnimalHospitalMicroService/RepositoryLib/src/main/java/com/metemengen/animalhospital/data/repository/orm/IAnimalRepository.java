@@ -24,7 +24,15 @@ public interface IAnimalRepository extends CrudRepository<Animal, Integer>
     //constructor projection
     @Query("""
         select new com.metemengen.animalhospital.data.entity.orm.dto.AnimalOwnerDetails(a.name, a.type, a.birthDate, o.name, o.phone)\s
-        from Animal a inner join Owner o on o = a.owner where a.name = :name\s
+        from Animal a inner join Owner o on o = a.owner where a.name = ?1\s
         """)
     Iterable<AnimalOwnerDetails> findByName(@Param("name") String name);
+
+    @Query("""
+            select new com.metemengen.animalhospital.data.entity.orm.dto.AnimalOwnerDetails(a.name, a.type, a.birthDate, o.name, o.phone)\s 
+            from Owner o join Animal a on o = a.owner join a.veterinarians v where v.diplomaNo = :no 
+        """)
+    Iterable<AnimalOwnerDetails> findByVeterinarianDiplomaNo(@Param("no") long no);
+
+
 }
