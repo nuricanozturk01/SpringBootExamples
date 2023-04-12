@@ -1,6 +1,6 @@
 package org.csystem.app.service.animalhospital.owner.controller;
 
-import org.csystem.app.service.animalhospital.owner.data.OwnersDTO;
+import org.csystem.app.service.animalhospital.owner.dto.OwnersDTO;
 import org.csystem.app.service.animalhospital.owner.service.OwnerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

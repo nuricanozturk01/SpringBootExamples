@@ -1,4 +1,4 @@
-package com.metemengen.animalhospital.data.entity;
+package com.metemengen.animalhospital.data.entity.jdbc.dto;
 
 import java.time.LocalDate;
 

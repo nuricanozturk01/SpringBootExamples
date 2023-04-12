@@ -1,8 +1,7 @@
-package com.metemengen.animalhospital.data.entity;
+package com.metemengen.animalhospital.data.entity.orm;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 @Table(name = "animals")

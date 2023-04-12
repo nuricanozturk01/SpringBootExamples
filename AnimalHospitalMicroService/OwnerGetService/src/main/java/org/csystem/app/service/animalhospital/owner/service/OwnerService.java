@@ -3,7 +3,7 @@ package org.csystem.app.service.animalhospital.owner.service;
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.dal.AnimalOwnerServiceHelper;
 
-import org.csystem.app.service.animalhospital.owner.data.OwnersDTO;
+import org.csystem.app.service.animalhospital.owner.dto.OwnersDTO;
 import org.csystem.app.service.animalhospital.owner.mapper.IOwnerMapper;
 import org.csystem.util.collection.CollectionUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +27,6 @@ public class OwnerService
 
     public OwnersDTO findOwnersByPhone(String phone)
     {
-        return m_ownerMapper.toOwnersDTO(StreamSupport.stream(m_animalOwnerServiceHelper.findByPhone(phone).spliterator(), false).toList());
+        return m_ownerMapper.toOwnersDTO(CollectionUtil.toList(m_animalOwnerServiceHelper.findByPhone(phone), m_ownerMapper::toOwnerDTO));
     }
 }

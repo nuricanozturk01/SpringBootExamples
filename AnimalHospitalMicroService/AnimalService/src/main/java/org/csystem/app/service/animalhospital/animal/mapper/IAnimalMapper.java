@@ -1,11 +1,8 @@
 package org.csystem.app.service.animalhospital.animal.mapper;
 
-import com.metemengen.animalhospital.data.entity.Animal;
-import com.metemengen.animalhospital.data.entity.AnimalOwnerDetails;
+import com.metemengen.animalhospital.data.entity.orm.Animal;
 import org.csystem.app.service.animalhospital.animal.dto.AnimalDTO;
-import org.csystem.app.service.animalhospital.animal.dto.AnimalOwnerDetailsDTO;
 import org.csystem.app.service.animalhospital.animal.dto.AnimalsDTO;
-import org.csystem.app.service.animalhospital.animal.dto.AnimalsOwnerDetailsDTO;
 import org.mapstruct.Mapper;
 
 import java.util.List;

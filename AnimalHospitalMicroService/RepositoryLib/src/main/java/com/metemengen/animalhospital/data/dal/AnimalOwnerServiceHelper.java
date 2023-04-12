@@ -1,9 +1,8 @@
 package com.metemengen.animalhospital.data.dal;
 
 import com.metemengen.animalhospital.data.BeanName;
-import com.metemengen.animalhospital.data.entity.Owner;
-import com.metemengen.animalhospital.data.entity.OwnerAnimalDetails;
-import com.metemengen.animalhospital.data.repository.IAnimalOwnerRepository;
+import com.metemengen.animalhospital.data.entity.orm.Owner;
+import com.metemengen.animalhospital.data.repository.orm.IOwnerRepository;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
@@ -13,15 +12,15 @@ import org.springframework.stereotype.Component;
 @Lazy
 public class AnimalOwnerServiceHelper
 {
-    private final IAnimalOwnerRepository m_animalOwnerRepository;
+    private final IOwnerRepository m_animalOwnerRepository;
 
     public AnimalOwnerServiceHelper (@Qualifier(BeanName.OWNER_REPOSITORY)
-                                     IAnimalOwnerRepository animalOwnerRepository)
+                                     IOwnerRepository animalOwnerRepository)
     {
         m_animalOwnerRepository = animalOwnerRepository;
     }
 
-    public Iterable<OwnerAnimalDetails> findByPhone(String phone)
+    public Iterable<Owner> findByPhone(String phone)
     {
             return m_animalOwnerRepository.findByPhone(phone);
     }

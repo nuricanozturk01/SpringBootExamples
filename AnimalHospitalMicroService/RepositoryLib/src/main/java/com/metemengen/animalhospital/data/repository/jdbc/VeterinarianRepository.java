@@ -1,10 +1,10 @@
-package com.metemengen.animalhospital.data.repository;
+package com.metemengen.animalhospital.data.repository.jdbc;
 
 import com.metemengen.animalhospital.data.BeanName;
-import com.metemengen.animalhospital.data.entity.Veterinarian;
-import com.metemengen.animalhospital.data.entity.VeterinarianWithFullName;
-import com.metemengen.animalhospital.data.entity.VeterinarianWithoutCitizenId;
-import com.metemengen.animalhospital.data.mapper.IVeterinarianMapper;
+import com.metemengen.animalhospital.data.entity.jdbc.Veterinarian;
+import com.metemengen.animalhospital.data.entity.jdbc.dto.VeterinarianWithFullName;
+import com.metemengen.animalhospital.data.entity.jdbc.dto.VeterinarianWithoutCitizenId;
+import com.metemengen.animalhospital.data.mapper.jdbc.IVeterinarianMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -269,10 +269,6 @@ public class VeterinarianRepository implements IVeterinarianRepository {
     {
         throw new UnsupportedOperationException();
     }
-
-
-
-
 
     @Override
     public <S extends Veterinarian> Iterable<S> saveAll(Iterable<S> entities)

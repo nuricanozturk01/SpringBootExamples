@@ -1,10 +1,8 @@
-package com.metemengen.animalhospital.data.repository;
+package com.metemengen.animalhospital.data.repository.jdbc;
 
 import com.karandev.util.data.repository.ICrudRepository;
-import com.metemengen.animalhospital.data.entity.Veterinarian;
-import com.metemengen.animalhospital.data.entity.VeterinarianWithFullName;
-import org.springframework.context.annotation.Lazy;
-
+import com.metemengen.animalhospital.data.entity.jdbc.Veterinarian;
+import com.metemengen.animalhospital.data.entity.jdbc.dto.VeterinarianWithFullName;
 
 
 public interface IVeterinarianRepository extends ICrudRepository<Veterinarian, Long>
