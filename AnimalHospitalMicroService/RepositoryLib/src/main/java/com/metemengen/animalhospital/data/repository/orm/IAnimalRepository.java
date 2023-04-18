@@ -24,7 +24,7 @@ public interface IAnimalRepository extends CrudRepository<Animal, Integer>
     //constructor projection
     @Query("""
         select new com.metemengen.animalhospital.data.entity.orm.dto.AnimalOwnerDetails(a.name, a.type, a.birthDate, o.name, o.phone)\s
-        from Animal a inner join Owner o on o = a.owner where a.name = ?1\s
+        from Animal a inner join Owner o on o = a.owner where a.name = lower(?1) \s
         """)
     Iterable<AnimalOwnerDetails> findByName(@Param("name") String name);
 

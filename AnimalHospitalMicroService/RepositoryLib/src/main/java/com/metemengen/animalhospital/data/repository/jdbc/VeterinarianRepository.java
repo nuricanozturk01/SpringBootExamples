@@ -24,8 +24,7 @@ import java.util.Optional;
 public class VeterinarianRepository implements IVeterinarianRepository {
     private static final String COUNT_SQL = "select count(*) from veterinarians";
     private static final String FIND_BY_DIPLOMA_NO_SQL = "select * from veterinarians where diploma_no=:diplomaNo";
-    private static final String FIND_BY_LAST_NAME_SQL = "select * from veterinarians where last_name=:lastName";
-
+    private static final String FIND_BY_LAST_NAME_SQL = "select * from veterinarians where last_name=lower(:lastName)";
     private static final String FIND_BY_MONTH_AND_YEAR_SQL = """
             select * from veterinarians where date_part('month', register_date) = :month\s
             and date_part('year', register_date) = :year""";
@@ -36,9 +35,6 @@ public class VeterinarianRepository implements IVeterinarianRepository {
     private static final String FIND_BY_MONTH_SQL = """
                 select diploma_no, first_name, middle_name, last_name, birth_date, register_date\s
                 from veterinarians where date_part('month', register_date) = :month
-                """;
-    private static final String FIND_BY_MONTH_SQL_3 = """
-                select * from find_
                 """;
 
     private static final String FIND_BY_MONTH_SQL_2 = """
