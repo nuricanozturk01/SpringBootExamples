@@ -1,5 +1,6 @@
 package com.metemengen.animalhospital.data.dal;
 
+import com.karandev.util.data.repository.exception.RepositoryException;
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.entity.jdbc.Veterinarian;
 import com.metemengen.animalhospital.data.entity.jdbc.dto.VeterinarianSave;
@@ -28,38 +29,73 @@ public class VeterinarianServiceHelper {
 
     public long countVeterinarians()
     {
-        //...
+        try {
+            return m_veterinarianRepository.count();
+        }
+        catch (Throwable ignored)
+        {
+            throw new RepositoryException("VeterinarianServiceHelper.countVeterinarians", ignored);
+        }
 
-        return m_veterinarianRepository.count();
     }
 
     public Optional<Veterinarian> findVeterinarianById(Long diplomaNo)
     {
-        //...
-        return m_veterinarianRepository.findById(diplomaNo);
+        try {
+            return m_veterinarianRepository.findById(diplomaNo);
+        }
+        catch (Throwable ignored)
+        {
+            throw new RepositoryException("VeterinarianServiceHelper.findVeterinarianById", ignored);
+        }
+
     }
 
     public Iterable<Veterinarian> findVeterinariansByLastName(String lastName)
     {
-        //...
-        return m_veterinarianRepository.findByLastName(lastName);
+        try {
+            return m_veterinarianRepository.findByLastName(lastName);
+        }
+        catch (Throwable ignored)
+        {
+            throw new RepositoryException("VeterinarianServiceHelper.findVeterinariansByLastName", ignored);
+        }
     }
 
     public Iterable<Veterinarian> findVeterinariansByMonthAndYear(int month, int year)
     {
-        //...
-        return m_veterinarianRepository.findByMonthAndYear(month, year);
+        try {
+            return m_veterinarianRepository.findByMonthAndYear(month, year);
+        }
+        catch (Throwable ignored)
+        {
+            throw new RepositoryException("VeterinarianServiceHelper.findVeterinariansByMonthAndYear", ignored);
+        }
+
     }
 
     public Iterable<VeterinarianWithFullName> findVeterinariansByYearBetween(int begin, int end)
     {
-        //...
-        return m_veterinarianRepository.findByYearBetween(begin, end);
+        try {
+            return m_veterinarianRepository.findByYearBetween(begin, end);
+        }
+        catch (Throwable ignored)
+        {
+            throw new RepositoryException("VeterinarianServiceHelper.countVeterinarians", ignored);
+        }
+
     }
 
     public VeterinarianSave save(VeterinarianSave veterinarianDTO)
     {
-        m_veterinarianRepository.save(m_veterinarianMapper.toVeterinarian(veterinarianDTO));
+        try {
+            m_veterinarianRepository.save(m_veterinarianMapper.toVeterinarian(veterinarianDTO));
+        }
+        catch (Throwable ignored)
+        {
+            throw new RepositoryException("VeterinarianServiceHelper.countVeterinarians", ignored);
+        }
+
 
         return veterinarianDTO;
     }
@@ -67,11 +103,23 @@ public class VeterinarianServiceHelper {
 
     public Iterable<Veterinarian> findVeterinariansByYear(int year)
     {
-        return m_veterinarianRepository.findByYear(year);
+        try {
+            return m_veterinarianRepository.findByYear(year);
+        }
+        catch (Throwable ignored)
+        {
+            throw new RepositoryException("VeterinarianServiceHelper.countVeterinarians", ignored);
+        }
     }
 
     public Iterable<Veterinarian> findVeterinariansByMonth(int month)
     {
-        return m_veterinarianRepository.findByMonth(month);
+        try {
+            return m_veterinarianRepository.findByMonth(month);
+        }
+        catch (Throwable ignored)
+        {
+            throw new RepositoryException("VeterinarianServiceHelper.countVeterinarians", ignored);
+        }
     }
 }

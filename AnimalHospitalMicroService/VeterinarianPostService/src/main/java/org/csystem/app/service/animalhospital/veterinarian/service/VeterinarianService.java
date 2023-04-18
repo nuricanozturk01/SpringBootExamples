@@ -1,5 +1,7 @@
 package org.csystem.app.service.animalhospital.veterinarian.service;
 
+import com.karandev.util.data.repository.exception.RepositoryException;
+import com.karandev.util.data.service.DataServiceException;
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.dal.VeterinarianServiceHelper;
 
@@ -25,8 +27,14 @@ public class VeterinarianService
 
     public VeterinarianSaveDTO saveVeterinarian(VeterinarianSaveDTO veterinarianSaveDTO)
     {
-        m_veterinarianServiceHelper.save(m_veterinarianSaveMapper.toVeterinarianSave(veterinarianSaveDTO));
-
+        try
+        {
+            m_veterinarianServiceHelper.save(m_veterinarianSaveMapper.toVeterinarianSave(veterinarianSaveDTO));
+        }
+        catch (RepositoryException ex)
+        {
+            throw new DataServiceException("VeterinarianService.saveVeterinarian", ex);
+        }
         return veterinarianSaveDTO;
     }
 
