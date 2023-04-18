@@ -1,3 +1,7 @@
-/Users/nuricanozturk/IdeaProjects/DataUtilLib/DataUtilLib/src/main/java/org/example/data/service/RepositoryException.java
-/Users/nuricanozturk/IdeaProjects/DataUtilLib/DataUtilLib/src/main/java/org/example/util/data/repository/ICrudRepository.java
-/Users/nuricanozturk/IdeaProjects/DataUtilLib/DataUtilLib/src/main/java/org/example/util/data/repository/exception/RepositoryException.java
+/Users/nuricanozturk/IdeaProjects/SpringBootExamples/DataUtilLib/DataUtilLib/src/main/java/org/example/util/data/repository/util/DataUtil.java
+/Users/nuricanozturk/IdeaProjects/SpringBootExamples/DataUtilLib/DataUtilLib/src/main/java/org/example/util/data/repository/util/ISupplier.java
+/Users/nuricanozturk/IdeaProjects/SpringBootExamples/DataUtilLib/DataUtilLib/src/main/java/org/example/util/data/repository/exception/DataServiceException.java
+/Users/nuricanozturk/IdeaProjects/SpringBootExamples/DataUtilLib/DataUtilLib/src/main/java/org/example/util/data/repository/ICrudRepository.java
+/Users/nuricanozturk/IdeaProjects/SpringBootExamples/DataUtilLib/DataUtilLib/src/main/java/org/example/util/data/repository/util/IRunnable.java
+/Users/nuricanozturk/IdeaProjects/SpringBootExamples/DataUtilLib/DataUtilLib/src/main/java/org/example/util/data/repository/exception/RepositoryException.java
+/Users/nuricanozturk/IdeaProjects/SpringBootExamples/DataUtilLib/DataUtilLib/src/main/java/org/example/data/service/RepositoryException.java

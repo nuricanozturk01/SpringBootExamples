@@ -1,5 +1,6 @@
 package com.metemengen.animalhospital.data.dal;
 
+import com.karandev.util.data.error.DataUtil;
 import com.metemengen.animalhospital.data.entity.orm.Animal;
 import com.metemengen.animalhospital.data.entity.orm.dto.AnimalOwnerDetails;
 import com.metemengen.animalhospital.data.entity.orm.view.IAnimalWithoutOwner;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+import static com.karandev.util.data.error.DataUtil.doForRepository;
 import static com.metemengen.animalhospital.data.BeanName.ANIMAL_SERVICE_HELPER;
 
 @Component(ANIMAL_SERVICE_HELPER)
@@ -24,29 +26,27 @@ public class AnimalServiceHelper
     }
     public Optional<Animal> findAnimalById(int id)
     {
-        return m_animalRepository.findById(id);
+        return doForRepository(() -> m_animalRepository.findById(id), "AnimalServiceHelper.findAnimalsByMonthAndYear");
     }
     public Iterable<Animal> findAnimalsByNameContainsAndSterile(String name, boolean sterile)
     {
-        return m_animalRepository.findByNameContainsAndSterile(name, sterile);
+        return doForRepository(() -> m_animalRepository.findByNameContainsAndSterile(name, sterile), "AnimalServiceHelper.findAnimalsByMonthAndYear");
     }
     public Iterable<Animal> findAnimalsByMonthAndYear(int mon, int year)
     {
-        return m_animalRepository.findByMonthAndYear(mon, year);
+        return doForRepository(() -> m_animalRepository.findByMonthAndYear(mon, year), "AnimalServiceHelper.findAnimalsByMonthAndYear");
     }
     public Iterable<AnimalOwnerDetails> findByName (String name)
     {
-        return m_animalRepository.findByName(name);
+        return doForRepository(() -> m_animalRepository.findByName(name), "AnimalServiceHelper.findByName");
     }
     public Iterable<IAnimalWithoutOwner> findAnimalsByType(String type)
     {
-        return m_animalRepository.findByType(type);
+        return doForRepository(() -> m_animalRepository.findByType(type), "AnimalServiceHelper.findAnimalsByType");
     }
 
     public Iterable<AnimalOwnerDetails> findByVeterinarianDiplomaNo(long no)
     {
-        return m_animalRepository.findByVeterinarianDiplomaNo(no);
+        return doForRepository(() -> m_animalRepository.findByVeterinarianDiplomaNo(no), "AnimalServiceHelper.findByVeterinarianDiplomaNo");
     }
-
-
 }

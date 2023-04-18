@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import static com.karandev.util.data.error.DataUtil.doForRepository;
+
 @Component(BeanName.OWNER_SERVICE_HELPER)
 @Lazy
 public class AnimalOwnerServiceHelper
@@ -22,6 +24,6 @@ public class AnimalOwnerServiceHelper
 
     public Iterable<Owner> findByPhone(String phone)
     {
-            return m_animalOwnerRepository.findByPhone(phone);
+        return doForRepository(() ->  m_animalOwnerRepository.findByPhone(phone), "AnimalOwnerServiceHelper.findByPhone");
     }
 }

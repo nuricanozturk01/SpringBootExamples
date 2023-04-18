@@ -1,3 +1,7 @@
 org/example/util/data/repository/ICrudRepository.class
+org/example/util/data/repository/util/DataUtil.class
+org/example/util/data/repository/util/ISupplier.class
 org/example/data/service/RepositoryException.class
+org/example/util/data/repository/util/IRunnable.class
 org/example/util/data/repository/exception/RepositoryException.class
+org/example/util/data/repository/exception/DataServiceException.class

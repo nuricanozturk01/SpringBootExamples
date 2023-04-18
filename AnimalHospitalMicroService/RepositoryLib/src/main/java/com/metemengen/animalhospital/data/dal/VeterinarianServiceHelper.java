@@ -1,5 +1,6 @@
 package com.metemengen.animalhospital.data.dal;
 
+import com.karandev.util.data.error.DataUtil;
 import com.karandev.util.data.repository.exception.RepositoryException;
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.entity.jdbc.Veterinarian;
@@ -12,6 +13,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+
+import static com.karandev.util.data.error.DataUtil.doForRepository;
 
 @Component(BeanName.VETERINARIAN_SERVICE_HELPER)
 @Lazy
@@ -29,97 +32,43 @@ public class VeterinarianServiceHelper {
 
     public long countVeterinarians()
     {
-        try {
-            return m_veterinarianRepository.count();
-        }
-        catch (Throwable ignored)
-        {
-            throw new RepositoryException("VeterinarianServiceHelper.countVeterinarians", ignored);
-        }
-
+        return doForRepository(m_veterinarianRepository::count,"VeterinarianServiceHelper.countVeterinarians");
     }
 
     public Optional<Veterinarian> findVeterinarianById(Long diplomaNo)
     {
-        try {
-            return m_veterinarianRepository.findById(diplomaNo);
-        }
-        catch (Throwable ignored)
-        {
-            throw new RepositoryException("VeterinarianServiceHelper.findVeterinarianById", ignored);
-        }
-
+        return doForRepository(() -> m_veterinarianRepository.findById(diplomaNo), "VeterinarianServiceHelper.findVeterinarianById");
     }
 
     public Iterable<Veterinarian> findVeterinariansByLastName(String lastName)
     {
-        try {
-            return m_veterinarianRepository.findByLastName(lastName);
-        }
-        catch (Throwable ignored)
-        {
-            throw new RepositoryException("VeterinarianServiceHelper.findVeterinariansByLastName", ignored);
-        }
+        return doForRepository(() -> m_veterinarianRepository.findByLastName(lastName), "VeterinarianServiceHelper.findVeterinariansByLastName");
     }
 
     public Iterable<Veterinarian> findVeterinariansByMonthAndYear(int month, int year)
     {
-        try {
-            return m_veterinarianRepository.findByMonthAndYear(month, year);
-        }
-        catch (Throwable ignored)
-        {
-            throw new RepositoryException("VeterinarianServiceHelper.findVeterinariansByMonthAndYear", ignored);
-        }
-
+        return doForRepository(() -> m_veterinarianRepository.findByMonthAndYear(month, year), "VeterinarianServiceHelper.findVeterinariansByMonthAndYear");
     }
 
     public Iterable<VeterinarianWithFullName> findVeterinariansByYearBetween(int begin, int end)
     {
-        try {
-            return m_veterinarianRepository.findByYearBetween(begin, end);
-        }
-        catch (Throwable ignored)
-        {
-            throw new RepositoryException("VeterinarianServiceHelper.countVeterinarians", ignored);
-        }
-
+        return doForRepository(() -> m_veterinarianRepository.findByYearBetween(begin, end), "VeterinarianServiceHelper.countVeterinarians");
     }
 
     public VeterinarianSave save(VeterinarianSave veterinarianDTO)
     {
-        try {
-            m_veterinarianRepository.save(m_veterinarianMapper.toVeterinarian(veterinarianDTO));
-        }
-        catch (Throwable ignored)
-        {
-            throw new RepositoryException("VeterinarianServiceHelper.countVeterinarians", ignored);
-        }
-
-
+        doForRepository(() ->  m_veterinarianRepository.save(m_veterinarianMapper.toVeterinarian(veterinarianDTO)), "VeterinarianServiceHelper.countVeterinarians");
         return veterinarianDTO;
     }
 
 
     public Iterable<Veterinarian> findVeterinariansByYear(int year)
     {
-        try {
-            return m_veterinarianRepository.findByYear(year);
-        }
-        catch (Throwable ignored)
-        {
-            throw new RepositoryException("VeterinarianServiceHelper.countVeterinarians", ignored);
-        }
+        return doForRepository(() -> m_veterinarianRepository.findByYear(year), "VeterinarianServiceHelper.countVeterinarians");
     }
 
     public Iterable<Veterinarian> findVeterinariansByMonth(int month)
     {
-        try {
-            return m_veterinarianRepository.findByMonth(month);
-        }
-        catch (Throwable ignored)
-        {
-            throw new RepositoryException("VeterinarianServiceHelper.countVeterinarians", ignored);
-        }
+        return doForRepository(() -> m_veterinarianRepository.findByMonth(month),"VeterinarianServiceHelper.countVeterinarians" );
     }
 }
