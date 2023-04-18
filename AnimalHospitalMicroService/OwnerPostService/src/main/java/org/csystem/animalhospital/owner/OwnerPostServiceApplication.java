@@ -1,4 +1,4 @@
-package nuricanozturk.dev.animalhospital.owner;
+package org.csystem.animalhospital.owner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

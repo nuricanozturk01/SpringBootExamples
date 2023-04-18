@@ -2,11 +2,13 @@ package com.metemengen.animalhospital.data.repository.jdbc;
 
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.entity.jdbc.Veterinarian;
+import com.metemengen.animalhospital.data.entity.jdbc.VeterinarianAnimalSave;
 import com.metemengen.animalhospital.data.entity.jdbc.dto.VeterinarianWithFullName;
 import com.metemengen.animalhospital.data.entity.jdbc.dto.VeterinarianWithoutCitizenId;
 import com.metemengen.animalhospital.data.mapper.jdbc.IVeterinarianMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -46,6 +48,8 @@ public class VeterinarianRepository implements IVeterinarianRepository {
     private static final String SAVE_SQL = """
             insert into veterinarians (diploma_no, citizen_id, first_name, middle_name, last_name, birth_date, register_date)
             values (:diplomaNo, :citizenId, :firstName, :middleName, :lastName, :birthDate, :registerDate)""";
+
+    private static final String SAVE_VETERINARIAN_ANIMAL_SQL = "call sp_insert_veterinarian_animal(:animalId, :diplomaNo, :price)";
 
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplate;
     private final IVeterinarianMapper m_veterinarianMapper;
@@ -201,6 +205,27 @@ public class VeterinarianRepository implements IVeterinarianRepository {
         m_namedParameterJdbcTemplate.query(FIND_BY_YEAR_SQL, paramMap, (ResultSet rs) -> fillVeterinarians(rs, veterinarians));
 
         return veterinarians;
+    }
+
+    @Override
+    public boolean saveVeterinarianAnimal(VeterinarianAnimalSave veterinarianAnimalSave)
+    {
+        boolean result = false;
+
+        try {
+            var paramSource = new BeanPropertySqlParameterSource(veterinarianAnimalSave);
+
+            //paramSource.registerSqlType("dateTime", Types.DATE);
+
+            m_namedParameterJdbcTemplate.update(SAVE_VETERINARIAN_ANIMAL_SQL, paramSource);
+
+            result = true;
+        }
+        catch (DataAccessException ignore) {
+            ignore.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override

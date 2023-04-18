@@ -1,4 +1,4 @@
-package nuricanozturk.dev.animalhospital.owner;
+package org.csystem.animalhospital.owner;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
