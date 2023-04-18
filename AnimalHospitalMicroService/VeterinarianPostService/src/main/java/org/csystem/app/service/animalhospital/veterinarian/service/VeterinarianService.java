@@ -1,5 +1,6 @@
 package org.csystem.app.service.animalhospital.veterinarian.service;
 
+import com.karandev.util.data.error.DataUtil;
 import com.karandev.util.data.repository.exception.RepositoryException;
 import com.karandev.util.data.service.DataServiceException;
 import com.metemengen.animalhospital.data.BeanName;
@@ -9,6 +10,8 @@ import org.csystem.app.service.animalhospital.veterinarian.dto.*;
 import org.csystem.app.service.animalhospital.veterinarian.mapper.IVeterinarianSaveMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import javax.xml.crypto.Data;
 
 @Service
 public class VeterinarianService
@@ -27,14 +30,7 @@ public class VeterinarianService
 
     public VeterinarianSaveDTO saveVeterinarian(VeterinarianSaveDTO veterinarianSaveDTO)
     {
-        try
-        {
-            m_veterinarianServiceHelper.save(m_veterinarianSaveMapper.toVeterinarianSave(veterinarianSaveDTO));
-        }
-        catch (RepositoryException ex)
-        {
-            throw new DataServiceException("VeterinarianService.saveVeterinarian", ex);
-        }
+        DataUtil.doForDataService(() -> m_veterinarianServiceHelper.save(m_veterinarianSaveMapper.toVeterinarianSave(veterinarianSaveDTO)),"VeterinarianService.saveVeterinarian");
         return veterinarianSaveDTO;
     }
 

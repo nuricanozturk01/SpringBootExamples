@@ -24,7 +24,6 @@ public class VeterinarianService
 {
     private final VeterinarianServiceHelper m_veterinarianServiceHelper;
     private final IVeterinarianMapper m_veterinarianMapper;
-
     private final IVeterinarianWithFullNameMapper m_veterinarianWithFullNameMapper;
 
     public VeterinarianService(@Qualifier(BeanName.VETERINARIAN_SERVICE_HELPER) VeterinarianServiceHelper veterinarianServiceHelper,
@@ -40,7 +39,6 @@ public class VeterinarianService
     {
         return doForDataService(() -> m_veterinarianMapper.toCountDTO(m_veterinarianServiceHelper.countVeterinarians()),
                 "VeterinarianService.countVeterinarians");
-
     }
 
     public Optional<VeterinarianDTO> findVeterinarianByDiplomaNo(long diplomaNo)

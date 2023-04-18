@@ -61,12 +61,10 @@ public class VeterinarianServiceHelper {
         return veterinarianDTO;
     }
 
-
     public Iterable<Veterinarian> findVeterinariansByYear(int year)
     {
         return doForRepository(() -> m_veterinarianRepository.findByYear(year), "VeterinarianServiceHelper.countVeterinarians");
     }
-
     public Iterable<Veterinarian> findVeterinariansByMonth(int month)
     {
         return doForRepository(() -> m_veterinarianRepository.findByMonth(month),"VeterinarianServiceHelper.countVeterinarians" );

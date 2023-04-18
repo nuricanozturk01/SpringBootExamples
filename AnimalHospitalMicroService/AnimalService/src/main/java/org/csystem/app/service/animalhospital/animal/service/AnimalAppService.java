@@ -1,5 +1,6 @@
 package org.csystem.app.service.animalhospital.animal.service;
 
+import com.karandev.util.data.error.DataUtil;
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.dal.AnimalServiceHelper;
 import com.metemengen.animalhospital.data.entity.orm.dto.AnimalOwnerDetails;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.stream.StreamSupport;
 
+import static com.karandev.util.data.error.DataUtil.doForDataService;
 import static org.csystem.util.collection.CollectionUtil.toList;
 @Service
 public class AnimalAppService {
@@ -37,27 +39,31 @@ public class AnimalAppService {
 
     public AnimalsDTO findByNameContainsAndSterile(String name, boolean sterile)
     {
-        return m_animalMapper.toAnimalsDTO(toList(m_animalServiceHelper.findAnimalsByNameContainsAndSterile(name, sterile),
-                m_animalMapper::toAnimalDTO));
+        return doForDataService(() -> m_animalMapper.toAnimalsDTO(toList(m_animalServiceHelper.findAnimalsByNameContainsAndSterile(name, sterile),
+                        m_animalMapper::toAnimalDTO)),
+                "AnimalService.findByNameContainsAndSterile");
     }
 
     public AnimalsWithoutOwnerDTO findByType(String type)
     {
-        return m_animalWithoutOwnerMapper
-                .toAnimalsWithoutOwnerDTO(StreamSupport.stream(m_animalServiceHelper.findAnimalsByType(type).spliterator(), false).toList());
+        return doForDataService(() -> m_animalWithoutOwnerMapper.toAnimalsWithoutOwnerDTO(StreamSupport.stream(m_animalServiceHelper.findAnimalsByType(type).spliterator(), false).toList()),
+                "AnimalService.findByType");
     }
 
     public AnimalsDTO findByMonthAndYear(int mon, int year)
     {
-        return m_animalMapper.toAnimalsDTO(toList(m_animalServiceHelper.findAnimalsByMonthAndYear(mon, year), m_animalMapper::toAnimalDTO));
+        return doForDataService(() -> m_animalMapper.toAnimalsDTO(toList(m_animalServiceHelper.findAnimalsByMonthAndYear(mon, year), m_animalMapper::toAnimalDTO)),
+                "AnimalService.findByMonthAndYear");
     }
 
     public AnimalsOwnerDetailsDTO findByName(String name)
     {
-        return m_animalOwnerDetailsMapper.toAnimalsOwnerDetailsDTO(StreamSupport.stream(m_animalServiceHelper.findByName(name).spliterator(), false).toList());
+        return doForDataService(() -> m_animalOwnerDetailsMapper.toAnimalsOwnerDetailsDTO(StreamSupport.stream(m_animalServiceHelper.findByName(name).spliterator(), false).toList()),
+                "AnimalService.findByName");
     }
     public AnimalsOwnerDetailsDTO findByVeterinarianDiplomaNo(long no)
     {
-        return m_animalOwnerDetailsMapper.toAnimalsOwnerDetailsDTO(StreamSupport.stream(m_animalServiceHelper.findByVeterinarianDiplomaNo(no).spliterator(), false).toList());
+        return doForDataService(() -> m_animalOwnerDetailsMapper.toAnimalsOwnerDetailsDTO(StreamSupport.stream(m_animalServiceHelper.findByVeterinarianDiplomaNo(no).spliterator(), false).toList()),
+               "AnimalService.findByVeterinarianDiplomaNo");
     }
 }
