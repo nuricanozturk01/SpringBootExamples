@@ -1,9 +1,9 @@
 package org.csystem.app.geonames.postalcodesearch.controller;
 
-import org.csystem.app.geonames.postalcodesearch.api.geonames.PostalCodes;
-import org.csystem.app.geonames.postalcodesearch.api.geonames.service.PostalCodeSearchService;
-import org.csystem.app.geonames.postalcodesearch.dto.PostalCodesDTO;
-import org.csystem.app.geonames.postalcodesearch.service.PostalCodeAppService;
+
+
+import org.csystem.geonames.service.dto.PostalCodesDTO;
+import org.csystem.geonames.service.service.PostalCodeAppService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
