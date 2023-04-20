@@ -11,6 +11,7 @@ public final class BeanName {
    // public static final String ANIMAL_OWNER_REPOSITORY = "com.metemengen.animalhospital.repository.animalowner";
     public static final String VETERINARIAN_SERVICE_HELPER = "com.metemengen.animalhospital.service.veterinarian";
     public static final String ANIMAL_SERVICE_HELPER = "com.metemengen.animalhospital.service.animal";
+    public static final String ANIMAL_POST_SERVICE_HELPER = "com.metemengen.animalhospital.service.post.animal";
 
     public static final String OWNER_SERVICE_HELPER = "com.metemengen.animalhospital.service.owner";
     public static final String VETERINARIAN_MAPPER = "com.metemengen.animalhospital.mapper.veterinarian";

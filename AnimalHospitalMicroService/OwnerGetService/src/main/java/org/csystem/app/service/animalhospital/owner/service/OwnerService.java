@@ -4,6 +4,7 @@ import com.karandev.util.data.error.DataUtil;
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.dal.AnimalOwnerServiceHelper;
 
+import org.csystem.app.service.animalhospital.owner.dto.OwnerDTO;
 import org.csystem.app.service.animalhospital.owner.dto.OwnersDTO;
 import org.csystem.app.service.animalhospital.owner.mapper.IOwnerMapper;
 import org.csystem.util.collection.CollectionUtil;
@@ -28,9 +29,9 @@ public class OwnerService
         m_animalOwnerServiceHelper = animalOwnerServiceHelper;
     }
 
-    public OwnersDTO findOwnersByPhone(String phone)
+    public OwnerDTO findOwnersByPhone(String phone)
     {
-        return doForDataService(() -> m_ownerMapper.toOwnersDTO(CollectionUtil.toList(m_animalOwnerServiceHelper.findByPhone(phone), m_ownerMapper::toOwnerDTO)),
+        return doForDataService(() -> m_ownerMapper.toOwnerDTO(m_animalOwnerServiceHelper.findByPhone(phone)),
                 "OwnerService.findOwnersByPhone");
     }
 }

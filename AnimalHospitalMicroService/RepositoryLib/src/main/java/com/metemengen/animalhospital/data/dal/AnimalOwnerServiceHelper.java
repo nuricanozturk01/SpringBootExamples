@@ -22,8 +22,8 @@ public class AnimalOwnerServiceHelper
         m_animalOwnerRepository = animalOwnerRepository;
     }
 
-    public Iterable<Owner> findByPhone(String phone)
+    public Owner findByPhone(String phone)
     {
-        return doForRepository(() ->  m_animalOwnerRepository.findByPhone(phone), "AnimalOwnerServiceHelper.findByPhone");
+        return doForRepository(() ->  m_animalOwnerRepository.findByPhone(phone).get(), "AnimalOwnerServiceHelper.findByPhone");
     }
 }

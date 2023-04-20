@@ -1,5 +1,6 @@
 package org.csystem.app.service.animalhospital.owner.controller;
 
+import org.csystem.app.service.animalhospital.owner.dto.OwnerDTO;
 import org.csystem.app.service.animalhospital.owner.dto.OwnersDTO;
 import org.csystem.app.service.animalhospital.owner.service.OwnerService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class AnimalOwnerController
 
 
     @GetMapping("find/owner/phone")
-    public OwnersDTO findOwnersByPhone(@RequestParam("phone") String phone)
+    public OwnerDTO findOwnersByPhone(@RequestParam("phone") String phone)
     {
         return m_ownerService.findOwnersByPhone(phone);
     }

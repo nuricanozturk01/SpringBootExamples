@@ -7,11 +7,14 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository(BeanName.OWNER_REPOSITORY)
 @Lazy
 public interface IOwnerRepository extends CrudRepository<Owner, Integer>
 {
         // DTO projection method. Must have constructor. DTO nun kendisini veritabanından çektik
-    Iterable<Owner> findByPhone(@Param("phone") String phone);
+    //Iterable<Owner> findByPhone(@Param("phone") String phone);
+    Optional<Owner> findByPhone(@Param("phone") String phone);
 }
 
