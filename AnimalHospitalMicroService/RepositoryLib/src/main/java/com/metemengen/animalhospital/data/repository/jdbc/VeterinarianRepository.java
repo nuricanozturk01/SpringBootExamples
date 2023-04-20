@@ -16,10 +16,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Repository(BeanName.VETERINARIAN_REPOSITORY)
 @Lazy
@@ -30,6 +27,8 @@ public class VeterinarianRepository implements IVeterinarianRepository {
     private static final String FIND_BY_MONTH_AND_YEAR_SQL = """
             select * from veterinarians where date_part('month', register_date) = :month\s
             and date_part('year', register_date) = :year""";
+
+    private static final String FIND_ALL_VETERINARIANS = "select * from veterinarians order by diploma_no";
 
     private static final String FIND_BY_YEAR_BETWEEN_SQL = """
            select * from find_veterinarian_by_year_between(:begin, :end)
@@ -240,6 +239,16 @@ public class VeterinarianRepository implements IVeterinarianRepository {
         return veterinarian;
     }
 
+    @Override
+    public Iterable<Veterinarian> findAll()
+    {
+        var veterinarians = new ArrayList<Veterinarian>();
+
+        m_namedParameterJdbcTemplate.query(FIND_ALL_VETERINARIANS, (ResultSet rs) -> fillVeterinarians(rs, veterinarians));
+
+        return veterinarians;
+    }
+
     ////////////////////////////////////////////////////////////////////
 
 
@@ -279,11 +288,7 @@ public class VeterinarianRepository implements IVeterinarianRepository {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public Iterable<Veterinarian> findAll()
-    {
-        throw new UnsupportedOperationException();
-    }
+
 
     @Override
     public Iterable<Veterinarian> findAllById(Iterable<Long> id)

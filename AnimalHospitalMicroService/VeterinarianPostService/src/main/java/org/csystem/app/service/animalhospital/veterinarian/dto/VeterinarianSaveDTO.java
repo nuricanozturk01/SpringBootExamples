@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public class VeterinarianSaveDTO {
     public long diplomaNo;
-    public String citizenId;
+        public String citizenId;
     public String firstName;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String middleName;

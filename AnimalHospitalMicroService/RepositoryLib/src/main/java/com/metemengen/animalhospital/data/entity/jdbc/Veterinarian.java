@@ -3,7 +3,7 @@ package com.metemengen.animalhospital.data.entity.jdbc;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class Veterinarian { //POJO (Plain Old Java Object)
+public class Veterinarian implements Comparable{ //POJO (Plain Old Java Object)
     public long diplomaNo;
     public String citizenId;
     public String firstName;
@@ -109,6 +109,19 @@ public class Veterinarian { //POJO (Plain Old Java Object)
     public void setRegisterDate(LocalDate registerDate)
     {
         this.registerDate = registerDate;
+    }
+
+    @Override
+    public int compareTo(Object vet)
+    {
+        var veterinarian = (Veterinarian)vet;
+
+        if (diplomaNo > veterinarian.getDiplomaNo())
+            return 1;
+        else if (diplomaNo == veterinarian.getDiplomaNo())
+            return 0;
+
+        return -1;
     }
 
     //...

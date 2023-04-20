@@ -72,6 +72,12 @@ public class VeterinarianService
                 "VeterinarianService.findVeterinarianByYear");
     }
 
+    public VeterinariansDTO findAllVeterinarians()
+    {
+        return doForDataService(() -> m_veterinarianMapper.toVeterinariansDTO(StreamSupport.stream(m_veterinarianServiceHelper.findAllVeterinarians().spliterator(), false).map(m_veterinarianMapper::toVeterinarianDTO).toList()),
+                "VeterinarianService.findAllVeterinarians");
+    }
+
     public VeterinariansDTO findVeterinarianByMonth(int month)
     {
         return doForDataService(() -> m_veterinarianMapper.toVeterinariansDTO(toList(m_veterinarianServiceHelper.findVeterinariansByMonth(month), m_veterinarianMapper::toVeterinarianDTO)),

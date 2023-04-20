@@ -108,4 +108,10 @@ public class VeterinarianController
     {
         return m_veterinarianService.findVeterinarianByMonth(month);
     }
+
+    @GetMapping("all")
+    public VeterinariansDTO findAllVeterinarians()
+    {
+        return m_veterinarianService.findAllVeterinarians();
+    }
 }

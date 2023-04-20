@@ -69,4 +69,9 @@ public class VeterinarianServiceHelper {
     {
         return doForRepository(() -> m_veterinarianRepository.findByMonth(month),"VeterinarianServiceHelper.countVeterinarians" );
     }
+
+    public Iterable<Veterinarian> findAllVeterinarians()
+    {
+        return doForRepository(m_veterinarianRepository::findAll,"VeterinarianServiceHelper.findAllVeterinarians" );
+    }
 }
