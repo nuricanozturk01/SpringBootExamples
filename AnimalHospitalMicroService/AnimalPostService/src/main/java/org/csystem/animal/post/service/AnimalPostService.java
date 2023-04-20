@@ -2,6 +2,7 @@ package org.csystem.animal.post.service;
 
 import com.karandev.util.data.error.DataUtil;
 import com.metemengen.animalhospital.data.dal.AnimalPostServiceHelper;
+import com.metemengen.animalhospital.data.entity.orm.dto.AnimalSaveDTO;
 import com.metemengen.animalhospital.data.entity.orm.dto.AnimalWithOwnerSaveDTO;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,14 @@ public class AnimalPostService
 
     public AnimalWithOwnerSaveDTO saveAnimalWithOwner(AnimalWithOwnerSaveDTO animalWithOwnerSaveDTO)
     {
-        return DataUtil.doForDataService(() -> m_animalPostServiceHelper.saveAnimal(animalWithOwnerSaveDTO),
+        return DataUtil.doForDataService(() -> m_animalPostServiceHelper.saveAnimalWithOwner(animalWithOwnerSaveDTO),
                 "AnimalPostService.saveAnimalWithOwner");
+    }
+
+    public AnimalSaveDTO saveAnimal(AnimalSaveDTO animalSaveDTO)
+    {
+        return DataUtil.doForDataService(() -> m_animalPostServiceHelper.saveAnimal(animalSaveDTO),
+                "AnimalPostService.saveAnimal");
     }
 
 }

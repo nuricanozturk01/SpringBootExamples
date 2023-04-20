@@ -1,8 +1,10 @@
 package com.metemengen.animalhospital.data.dal;
 
+import com.karandev.util.data.repository.exception.RepositoryException;
 import com.metemengen.animalhospital.data.BeanName;
 import com.metemengen.animalhospital.data.entity.orm.Owner;
 import com.metemengen.animalhospital.data.entity.orm.dto.AnimalDTO;
+import com.metemengen.animalhospital.data.entity.orm.dto.AnimalSaveDTO;
 import com.metemengen.animalhospital.data.entity.orm.dto.AnimalWithOwnerSaveDTO;
 import com.metemengen.animalhospital.data.mapper.orm.IAnimalDTOMapper;
 import com.metemengen.animalhospital.data.repository.orm.IAnimalRepository;
@@ -49,11 +51,24 @@ public class AnimalPostServiceHelper
 
 
     @Transactional
-    public AnimalWithOwnerSaveDTO saveAnimal(AnimalWithOwnerSaveDTO animal)
+    public AnimalWithOwnerSaveDTO saveAnimalWithOwner(AnimalWithOwnerSaveDTO animal)
     {
         var opt = m_ownerRepository.findByPhone(animal.phone);
         opt.ifPresentOrElse(owner -> saveAnimalCallback(animal, owner), () -> saveAnimalEmptyCallback(animal));
         return animal;
+    }
+
+    @Transactional
+    public AnimalSaveDTO saveAnimal(AnimalSaveDTO animalSaveDTO)
+    {
+        var opt = m_ownerRepository.findByPhone(animalSaveDTO.phone);
+
+        if (opt.isEmpty())
+            throw new RepositoryException("No such phone for owner");
+
+        saveAnimalCallback(animalSaveDTO, opt.get());
+
+        return animalSaveDTO;
     }
 
 
