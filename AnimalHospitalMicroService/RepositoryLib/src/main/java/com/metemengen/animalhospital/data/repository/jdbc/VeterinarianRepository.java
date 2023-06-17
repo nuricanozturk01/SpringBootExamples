@@ -49,7 +49,7 @@ public class VeterinarianRepository implements IVeterinarianRepository {
             values (:diplomaNo, :citizenId, :firstName, :middleName, :lastName, :birthDate, :registerDate)""";
 
     private static final String SAVE_VETERINARIAN_ANIMAL_SQL = "call sp_insert_veterinarian_animal(:animalId, :diplomaNo, :price)";
-
+    private static final String FIND_ALL_WITH_FULL_NAME = "select * from find_all_veterinarians_with_full_name()";
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplate;
     private final IVeterinarianMapper m_veterinarianMapper;
 
@@ -225,6 +225,16 @@ public class VeterinarianRepository implements IVeterinarianRepository {
         }
 
         return result;
+    }
+
+    @Override
+    public Iterable<VeterinarianWithFullName> findAllWithFullName() {
+        var paramMap = new HashMap<String, Object>();
+        var veterinarians = new ArrayList<VeterinarianWithFullName>();
+
+        m_namedParameterJdbcTemplate.query(FIND_ALL_WITH_FULL_NAME, paramMap, (ResultSet rs) -> fillVeterinariansWithFullName(rs, veterinarians));
+
+        return veterinarians;
     }
 
     @Override

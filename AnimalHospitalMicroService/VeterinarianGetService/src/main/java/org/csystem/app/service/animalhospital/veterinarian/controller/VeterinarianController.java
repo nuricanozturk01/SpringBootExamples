@@ -1,5 +1,6 @@
 package org.csystem.app.service.animalhospital.veterinarian.controller;
 
+import com.karandev.util.exception.ExceptionUtil;
 import org.csystem.app.service.animalhospital.veterinarian.dto.*;
 import org.csystem.app.service.animalhospital.veterinarian.mapper.IVeterinarianMapper;
 import org.csystem.app.service.animalhospital.veterinarian.service.VeterinarianService;
@@ -113,5 +114,11 @@ public class VeterinarianController
     public VeterinariansDTO findAllVeterinarians()
     {
         return m_veterinarianService.findAllVeterinarians();
+    }
+
+    @GetMapping("name/full")
+    public ResponseEntity<Object> findAllWithFullName() {
+        return ExceptionUtil.subscribe(() -> ResponseEntity.ok(m_veterinarianService.findAllVeterinariansWithFullName()),
+                ignore -> ResponseEntity.internalServerError().body(new VeterinarianError("Internal problem occurs!...Try again later", HttpStatus.INTERNAL_SERVER_ERROR.value())));
     }
 }

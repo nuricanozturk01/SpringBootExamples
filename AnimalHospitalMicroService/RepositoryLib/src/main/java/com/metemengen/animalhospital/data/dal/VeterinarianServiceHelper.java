@@ -74,4 +74,9 @@ public class VeterinarianServiceHelper {
     {
         return doForRepository(m_veterinarianRepository::findAll,"VeterinarianServiceHelper.findAllVeterinarians" );
     }
+
+    public Iterable<VeterinarianWithFullName> findAllVeterinariansWithFullName() {
+        return doForRepository(m_veterinarianRepository::findAllWithFullName, "VeterinarianServiceHelper.findAllVeterinariansWithFullName");
+    }
+
 }

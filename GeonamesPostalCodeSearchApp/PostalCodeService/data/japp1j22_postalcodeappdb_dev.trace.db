@@ -1,0 +1,6 @@
+2023-04-23 14:00:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "POSTAL_CODE_INFO" not found (this database is empty); SQL statement:
+select count(*) from postal_code_info p1_0 where p1_0.code=? [42104-214]
+2023-06-16 17:09:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "POSTAL_CODE_INFO" not found (this database is empty); SQL statement:
+select count(*) from postal_code_info p1_0 where p1_0.code=? [42104-214]

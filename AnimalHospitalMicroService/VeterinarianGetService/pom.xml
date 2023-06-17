@@ -27,6 +27,7 @@
             <scope>compile</scope>
         </dependency>
 
+
         <dependency>
             <groupId>com.karandev</groupId>
             <artifactId>com-karandev-util-exception</artifactId>

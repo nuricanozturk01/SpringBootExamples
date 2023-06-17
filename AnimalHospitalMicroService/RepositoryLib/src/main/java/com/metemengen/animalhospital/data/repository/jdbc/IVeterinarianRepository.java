@@ -14,4 +14,6 @@ public interface IVeterinarianRepository extends ICrudRepository<Veterinarian, L
     Iterable<Veterinarian> findByMonth(int month);
     Iterable<Veterinarian> findByYear(int year);
     boolean saveVeterinarianAnimal(VeterinarianAnimalSave veterinarianAnimalSave);
+
+    Iterable<VeterinarianWithFullName> findAllWithFullName();
 }
